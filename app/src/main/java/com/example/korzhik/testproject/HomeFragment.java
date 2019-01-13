@@ -24,13 +24,8 @@ public class HomeFragment extends Fragment {//начальный экран
         exs[2] = supView.findViewById(R.id.ex_3);
         exs[3] = supView.findViewById(R.id.ex_4);
         exs[4] = supView.findViewById(R.id.ex_5);
-        exs[5] = supView.findViewById(R.id.ex_6);
-        exs[6] = supView.findViewById(R.id.ex_7);
-        exs[7] = supView.findViewById(R.id.ex_8);
-        exs[8] = supView.findViewById(R.id.ex_9);
-        exs[9] = supView.findViewById(R.id.ex_10);
 
-        for(int i=0;i<10;++i){
+        for(int i=0;i<5;++i){
             exs[i].setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
