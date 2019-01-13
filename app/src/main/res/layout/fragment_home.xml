@@ -30,13 +30,15 @@
             <!--ИЗНАЧАЛЬНОЕ ПРЕДСТАВЛЕНИЕ-->
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/ex_1"
+                android:onClick="onClick"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/colorItemMenu"
                 android:paddingLeft="16dp"
                 android:paddingTop="16dp"
-                android:paddingRight="16dp">
+                android:paddingRight="16dp"
+                tools:ignore="OnClick">
 
                 <ImageView
                     android:id="@+id/quest_1_pic"
