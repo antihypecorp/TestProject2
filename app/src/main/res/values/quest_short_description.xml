@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="id101">Прочитайте статью в научно-популярном журнале</string>
+    <string name="id103">Посетите библиотеку</string>
+    <string name="id104">Посетите научно-популярную лекцию</string>
+    <string name="id201">Пообщайтесь со старым знакомым</string>
+    <string name="id203">Посетите клуб настольных игр</string>
+    <string name="id204">Заведите новое знакомство</string>
+    <string name="id301">Накормите бездомное животное</string>
+    <string name="id303">Пожертвуйте старые вещи нуждающимся</string>
+    <string name="id304">Помогите кому-то из своих близких</string>
+    <string name="id401">Приберитесь в своей комнате</string>
+    <string name="id403">Приберитесь во всей квартире</string>
+    <string name="id404">Избавьтесь от ненужных вещей</string>
+    <string name="id501">Пробегите 1 километро</string>
+    <string name="id502">Выполните зарядку из нескольких упражнений</string>
+    <string name="id503">Пробегите 5 километров</string>
+</resources>
