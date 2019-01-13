@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="id101">Гранит науки</string>
+    <string name="id103">Не шуметь!</string>
+    <string name="id104">Кто слушает, тот и скушает</string>
+    <string name="id201">Флешбек</string>
+    <string name="id203">За одним столом...</string>
+    <string name="id204">Не имей сто рублей...</string>
+    <string name="id301">Братья наши меньшие</string>
+    <string name="id303">Для кого-то - роскошь</string>
+    <string name="id304">Вспомни о родных</string>
+    <string name="id401">Уборка: начало</string>
+    <string name="id403">Уборка: продолжение</string>
+    <string name="id404">Старое - в топку!</string>
+    <string name="id501">Бег: начало</string>
+    <string name="id502">В здоровом теле...</string>
+    <string name="id503">Бег: продолжение</string>
+</resources>
