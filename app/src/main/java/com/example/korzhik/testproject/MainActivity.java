@@ -6,7 +6,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     };
+    String t;
 
     @Override                                                                                       //первый звпуск
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction()
                 .replace(R.id.fragment_container, new HomeFragment())
                 .commit();
+
+
+
     }
 
 }

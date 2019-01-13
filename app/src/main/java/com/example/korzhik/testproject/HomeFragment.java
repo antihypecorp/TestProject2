@@ -10,8 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 public class HomeFragment extends Fragment {//начальный экран
-    private ConstraintLayout c;
+    PrintWriter out;
+    {
+        try {
+            out = new PrintWriter("myfile.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     String name = "name";
     ConstraintLayout exs[] = new ConstraintLayout[10];
     View supView;
