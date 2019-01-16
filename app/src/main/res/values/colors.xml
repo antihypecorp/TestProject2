@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
     <color name="colorItemMenu">#e0e0e0</color>
+    <color name="colorPrimary">#673AB7</color>
+    <color name="colorPrimaryDark">#512DA8</color>
+    <color name="primary_light">#D1C4E9</color>
+    <color name="colorAccent">#E040FB</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#BDBDBD</color>
+    <color name="accept_button_active">#fbc02d</color>
+    <color name="accept_button_inactive">#fff59d</color>
+    <color name="pass_button_active">#2e7d32</color>
+    <color name="pass_button_inactive">#a5d6a7</color>
 </resources>

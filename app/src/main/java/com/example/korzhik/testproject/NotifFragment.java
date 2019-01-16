@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 public class NotifFragment extends Fragment {//квест
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_notif, container, false);
+
     }
 }
