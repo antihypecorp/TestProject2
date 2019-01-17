@@ -5,30 +5,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
+    tools:context=".RegActivity"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="10dp">
+    android:padding="25dp">
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Имя"/>
+
+    <EditText
+        android:id="@+id/etSurname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Фамилия"/>
 
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Никнейм"
-        android:padding="5dp"
-        android:layout_margin="10dp"/>
+        android:hint="Логин"/>
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Пароль"
-        android:padding="5dp"
-        android:layout_margin="10dp"/>
+        android:hint="Пароль"/>
+
+    <EditText
+        android:id="@+id/etConfPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Подтвердить пароль"/>
 
     <TextView
         android:id="@+id/answer"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"/>
 
@@ -36,15 +50,12 @@
         android:id="@+id/bLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Войти"
-        android:layout_margin="10dp"/>
+        android:text="Зарегистрироваться"/>
 
     <Button
-        android:id="@+id/bReg"
+        android:id="@+id/bBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Зарегистрироваться"
-        android:gravity="center"
-        android:layout_margin="10dp"/>
+        android:text="Вернуться назад"/>
 
 </LinearLayout>

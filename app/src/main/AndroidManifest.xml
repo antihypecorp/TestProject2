@@ -16,6 +16,12 @@
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
+            android:screenOrientation="nosensor" />
+        <activity android:name=".QuestActivity" />
+        <activity
+            android:name=".LoginMainActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
             android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,8 +29,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".QuestActivity" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegActivity"></activity>
     </application>
 
 </manifest>

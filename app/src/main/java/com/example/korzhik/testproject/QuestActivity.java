@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 import android.widget.TextView;
 
@@ -42,10 +41,10 @@ public class QuestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quest);
 
-        name = findViewById(R.id.quest_name_large);
-        shortInfo = findViewById(R.id.quest_description_short_large);
-        fullInfo = findViewById(R.id.quest_description_long_large);
-        view = findViewById(R.id.great);
+        //name = findViewById(R.id.quest_name_large);
+        //shortInfo = findViewById(R.id.quest_description_short_large);
+        //fullInfo = findViewById(R.id.quest_description_long_large);
+        //view = findViewById(R.id.great);
 
 
         // ПОЛУЧЕНИЕ КВЕСТОВ С СЕРВЕРА
@@ -80,9 +79,9 @@ public class QuestActivity extends AppCompatActivity {
                     showShortInfos.add(qcForeach.getShort_info());
                     showFullInfos.add(qcForeach.getFull_info());
                 }
-                name.setText(showNames.get(0));
-                shortInfo.setText(showShortInfos.get(0));
-                fullInfo.setText(showFullInfos.get(0));
+                //name.setText(showNames.get(0));
+                //shortInfo.setText(showShortInfos.get(0));
+                //fullInfo.setText(showFullInfos.get(0));
             }
             @Override
             public void onFailure(Call<List<QuestCard>> call, Throwable t) {

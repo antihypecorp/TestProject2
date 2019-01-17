@@ -72,32 +72,33 @@ public class HomeFragment extends Fragment {//начальный экран
         // отправка запроса
         call.enqueue(new Callback<List<QuestCard>>() {
             @Override
-            public void onResponse(Call<List<QuestCard>> call, Response<List<QuestCard>> response) {
+            public void onResponse(Call<List<QuestCard>> call,
+                                   Response<List<QuestCard>> response) {
 
                 questCard = response.body();
                 Log.d("MyLog", "ЗАПРОС ПОЛУЧЕН");
 
-                 db = Room.databaseBuilder(getActivity().getApplicationContext(),
-                        LocalBDClass.class, "TEST9").build();
-
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    protected Void doInBackground(Void... voids) {
-                        for (QuestCard qcForeach : questCard) {
-                            Log.d("MyLog", "qur");
-                            db.getQuestCardDAO().insertAll(qcForeach);
-
-                        }
-                        outputQuestCard = db.getQuestCardDAO().getAllquestCard();
-
-                        return null;
-                    }
-
-                    @Override
-                    protected void onPostExecute(Void aVoid) {
-                        super.onPostExecute(aVoid);
-                    }
-                }.execute();
+//                 db = Room.databaseBuilder(getActivity().getApplicationContext(),
+//                        LocalBDClass.class, "TEST9").build();
+//
+//                new AsyncTask<Void, Void, Void>() {
+//                    @Override
+//                    protected Void doInBackground(Void... voids) {
+//                        for (QuestCard qcForeach : questCard) {
+//                            Log.d("MyLog", "qur");
+//                            db.getQuestCardDAO().insertAll(qcForeach);
+//
+//                        }
+//                        outputQuestCard = db.getQuestCardDAO().getAllquestCard();
+//
+//                        return null;
+//                    }
+//
+//                    @Override
+//                    protected void onPostExecute(Void aVoid) {
+//                        super.onPostExecute(aVoid);
+//                    }
+//                }.execute();
 
                 Log.d("MyLog", "BD CREATED");
 //                for (int i = 0; i < 5; ++i) {

@@ -20,48 +20,56 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class LoginActivity extends AppCompatActivity {
+public class RegActivity extends AppCompatActivity {
 
     // Объявляем переменные
+    private EditText etName;
+    private EditText etSurname;
     private EditText etUsername;
     private EditText etPassword;
     private Button btnLogin;
-    private Button btnReg;
+    private Button btnBack;
 
+    public String name;
+    public String surname;
     public String username;
     public String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_reg);
 
         // К приватным переменным привязываем элементы верстки
+        etName = findViewById(R.id.etName);
+        etSurname = findViewById(R.id.etSurname);
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
-        btnReg = findViewById(R.id.bReg);
+        btnBack = findViewById(R.id.bBack);
         btnLogin = findViewById(R.id.bLogin);
 
-        // Если нажали кнопку "Зарегистрироваться", то перенаправить на окно регистрации
-        btnReg.setOnClickListener(new View.OnClickListener() {
+        // Если нажали кнопку "Вернуться назад", то возвращаем пользователя назад
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentReg = new Intent(
-                        LoginActivity.this,
-                        RegActivity.class);
-                startActivity(intentReg);
+                Intent intentBackL = new Intent(
+                        RegActivity.this,
+                        LoginActivity.class);
+                startActivity(intentBackL);
             }
         });
 
-        // Если нажата кнопка "Войти", то происходить следующее...
+        // Если нажата кнопка "Зарегистрироваться", то...
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // К нашим публичным строкам присваиваем значения из полей
+                // Присваиваем публичным переменным значения их полей
+                name = etName.getText().toString();
+                surname = etSurname.getText().toString();
                 username = etUsername.getText().toString();
                 password = etPassword.getText().toString();
 
-                // Начали запрос
+                // Начинаем запрос
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(APILogin.HOST)
                         .addConverterFactory(GsonConverterFactory.create())
@@ -69,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 APILogin apiLogin = retrofit.create(APILogin.class);
 
-                Call<ResponseBody> call = apiLogin.loginUser(username, password);
+                Call<ResponseBody> call = apiLogin.regUser(name, surname, username, password);
 
                 call.enqueue(new Callback<ResponseBody>() {
                     // Что произойдет в случае удачного исхода
@@ -77,38 +85,37 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         TextView answer = (TextView) findViewById(R.id.answer);
                         try {
-                            // Если с сервера не были возвращены ошибки, то...
+                            // Если с сервера были возвращены ошибки, то отобразить их в строке
                             final String mMessage = response.body().string();
-                            if (!mMessage.equals("Пользователя с таким ником не существует")) {
-                                if (!mMessage.equals("Введен неверный пароль")) {
-                                    SharedPreferences preferences = PreferenceManager
-                                            .getDefaultSharedPreferences(
-                                                    LoginActivity.this);
-                                    SharedPreferences.Editor editor = preferences.edit();
-                                    editor.putString("username", username);
-                                    editor.putString("token", mMessage);
-                                    editor.apply();
-                                    Intent intentReged = new Intent(
-                                            LoginActivity.this,
-                                            MainActivity.class);
-                                    startActivity(intentReged);
-                                } else {
-                                    answer.setText(mMessage);
-                                }
-                            } else {
+                            if (mMessage.equals("Переданы неверные данные") |
+                                    mMessage.equals("Никнейм не менее 5 символов") |
+                                    mMessage.equals("Пароль не менее 8 символов") |
+                                    mMessage.equals("Пароли не совпадают") |
+                                    mMessage.equals("Пользователь с таким ником уже зарегистрирован")) {
                                 answer.setText(mMessage);
+                            } else {
+                                // Если с сервера не были возвращены ошибки, то...
+                                // Открываем SharedPreferences и сохраняем в него Никнейм и токен
+                                SharedPreferences preferences = PreferenceManager
+                                        .getDefaultSharedPreferences(RegActivity.this);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putString("username", username);
+                                editor.putString("token", mMessage);
+                                editor.apply();
+                                // Перекидываем пользователя на страницу профиля
+                                startActivity(new Intent(RegActivity.this,
+                                        MainActivity.class));
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-
                     }
 
                     // Что произойдет в случае неудачного исхода
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
                         // Показываем Тост с просьбой попробовать снова
-                        Toast.makeText(LoginActivity.this,
+                        Toast.makeText(RegActivity.this,
                                 "Что-то пошло не так...Попробуйте снова",
                                 Toast.LENGTH_LONG)
                                 .show();
@@ -116,6 +123,5 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
-
     }
 }
