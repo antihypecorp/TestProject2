@@ -59,6 +59,7 @@ public class HomeFragment extends Fragment {//начальный экран
         tvs_shorts[3] = supView.findViewById(R.id.quest_4_short_description);
         tvs_shorts[4] = supView.findViewById(R.id.quest_5_short_description);
 
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(APIService.HOST)
                 .addConverterFactory(GsonConverterFactory
@@ -77,42 +78,24 @@ public class HomeFragment extends Fragment {//начальный экран
 
                 questCard = response.body();
                 Log.d("MyLog", "ЗАПРОС ПОЛУЧЕН");
+//                MyApplication ma = new MyApplication();
+//                ma.onCreate();
+//                mt = new MyTask();
+//                mt.execute();
 
-//                 db = Room.databaseBuilder(getActivity().getApplicationContext(),
-//                        LocalBDClass.class, "TEST9").build();
-//
-//                new AsyncTask<Void, Void, Void>() {
-//                    @Override
-//                    protected Void doInBackground(Void... voids) {
-//                        for (QuestCard qcForeach : questCard) {
-//                            Log.d("MyLog", "qur");
-//                            db.getQuestCardDAO().insertAll(qcForeach);
-//
-//                        }
-//                        outputQuestCard = db.getQuestCardDAO().getAllquestCard();
-//
-//                        return null;
-//                    }
-//
-//                    @Override
-//                    protected void onPostExecute(Void aVoid) {
-//                        super.onPostExecute(aVoid);
-//                    }
-//                }.execute();
 
-                Log.d("MyLog", "BD CREATED");
+//                Log.d("MyLog", "BD CREATED");
 //                for (int i = 0; i < 5; ++i) {
 //                    tvs_names[i].setText(outputQuestCard.get(i).getName());
 //                    tvs_shorts[i].setText(outputQuestCard.get(i).getShort_info());
 //                }
 
 
+                // showNames.add(qcForeach.getName());
+                //showShortInfos.add(qcForeach.getShort_info());
+                //showFullInfos.add(qcForeach.getFull_info());
 
-//                // showNames.add(qcForeach.getName());
-//                //showShortInfos.add(qcForeach.getShort_info());
-//                //showFullInfos.add(qcForeach.getFull_info());
-//
-//                // ВРЕМЕННО: листы с полученными с сервера значениями имен и описаний
+                // ВРЕМЕННО: листы с полученными с сервера значениями имен и описаний
 //                ArrayList<String> showNames = new ArrayList<String>();
 //                ArrayList<String> showShortInfos = new ArrayList<String>();
 //                ArrayList<String> showFullInfos = new ArrayList<String>();
@@ -127,7 +110,7 @@ public class HomeFragment extends Fragment {//начальный экран
 //                    tvs_names[i].setText(showNames.get(i));
 //                    tvs_shorts[i].setText(showShortInfos.get(i));
 //                }
-
+//
             }
 
             @Override
@@ -150,4 +133,30 @@ public class HomeFragment extends Fragment {//начальный экран
         }
         return supView;
     }
+
+//    class MyTask extends AsyncTask<Void, Void, Void> {
+//
+//        @Override
+//        protected Void doInBackground(Void... voids) {
+//            for (QuestCard qcForeach : questCard) {
+//                Log.d("MyLog", "qur");
+//
+//                MyApplication
+//                        .getInstance()
+//                        .getDatabase()
+//                        .getQuestCardDAO()
+//                        .insertAll(qcForeach);
+//
+//            }
+//            return null;
+//        }
+//
+//
+//        @Override
+//        protected void onPostExecute(Void aVoid) {
+//            super.onPostExecute(aVoid);
+//        }
+//
+//    }
+
 }

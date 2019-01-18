@@ -11,6 +11,8 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface APILogin {
+    // Так уж сложилось, что этот интерфейс отвечает не только за логин, но и за регистрацию
+    // и за выход из приложения
 
     String HOST = "http://game.mifoza.com";
 
