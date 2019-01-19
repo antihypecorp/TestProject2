@@ -98,10 +98,10 @@ public class HomeFragment extends Fragment {//начальный экран
                 outputQuestCard = liveData.getValue();
 
 
-//                for (int i = 0; i < 5; ++i) {
-//                    tvs_names[i].setText(outputQuestCard.get(i).getName());
-//                    tvs_shorts[i].setText(outputQuestCard.get(i).getShort_info());
-//                }
+                for (int i = 0; i < 5; ++i) {
+                    tvs_names[i].setText(outputQuestCard.get(i).getName());
+                    tvs_shorts[i].setText(outputQuestCard.get(i).getShort_info());
+                }
 
 
 //                MyApplication ma = new MyApplication();
