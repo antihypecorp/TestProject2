@@ -1,5 +1,7 @@
 package com.example.korzhik.testproject;
 
+import android.app.Application;
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -31,6 +34,9 @@ public class HomeFragment extends Fragment {//начальный экран
     TextView tvs_names[] = new TextView[5]; // массив имен квестов
     TextView tvs_shorts[] = new TextView[5]; // массив кратких описаний квестов
     View supView;
+
+    private QuestCardRepository questCardRepository;
+    Application application;
 
     List<QuestCard> questCard;
     List<QuestCard> outputQuestCard;
@@ -60,6 +66,10 @@ public class HomeFragment extends Fragment {//начальный экран
         tvs_shorts[4] = supView.findViewById(R.id.quest_5_short_description);
 
 
+        application = getActivity().getApplication();
+        questCardRepository = new QuestCardRepository(application);
+
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(APIService.HOST)
                 .addConverterFactory(GsonConverterFactory
@@ -76,8 +86,24 @@ public class HomeFragment extends Fragment {//начальный экран
             public void onResponse(Call<List<QuestCard>> call,
                                    Response<List<QuestCard>> response) {
 
+
                 questCard = response.body();
                 Log.d("MyLog", "ЗАПРОС ПОЛУЧЕН");
+
+                for (QuestCard qcForeach : questCard) {
+                    questCardRepository.insert(qcForeach);
+                }
+                LiveData<List<QuestCard>> liveData = questCardRepository.getAllQuestCards();
+
+                outputQuestCard = liveData.getValue();
+
+
+//                for (int i = 0; i < 5; ++i) {
+//                    tvs_names[i].setText(outputQuestCard.get(i).getName());
+//                    tvs_shorts[i].setText(outputQuestCard.get(i).getShort_info());
+//                }
+
+
 //                MyApplication ma = new MyApplication();
 //                ma.onCreate();
 //                mt = new MyTask();

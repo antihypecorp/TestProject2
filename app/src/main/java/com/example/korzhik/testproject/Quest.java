@@ -1,5 +1,6 @@
 package com.example.korzhik.testproject;
 
+
 public class Quest {
     String questName;
     String short_description;

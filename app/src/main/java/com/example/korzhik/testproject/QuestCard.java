@@ -5,10 +5,12 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 
-@Entity
+@Entity(tableName = "questCard_table")
 public class QuestCard {
-    @PrimaryKey
-    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    private int idtable;
+
+
     private String id;
 
     private String name;
@@ -18,7 +20,11 @@ public class QuestCard {
     // int points;
     private String lvl;
 
-    public void setId(@NonNull String id) {
+    public void setIdtable(int idtable) {
+        this.idtable = idtable;
+    }
+
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -42,7 +48,11 @@ public class QuestCard {
         this.lvl = lvl;
     }
 
-    @NonNull
+
+    public int getIdtable() {
+        return idtable;
+    }
+
     public String getId() {
         return id;
     }
