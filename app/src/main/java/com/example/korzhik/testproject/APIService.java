@@ -10,6 +10,7 @@ public interface APIService {
 
     String HOST = "http://game.mifoza.com";
 
+    // GET запрос для получения Квестов
     @GET("tasks/get.php")
     Call<List<QuestCard>> getQuestCard();
 }
