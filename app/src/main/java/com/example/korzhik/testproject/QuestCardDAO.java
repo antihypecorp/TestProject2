@@ -1,5 +1,6 @@
 package com.example.korzhik.testproject;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -11,12 +12,15 @@ import java.util.List;
 public interface QuestCardDAO {
 
     @Insert
-    void insertAll(QuestCard... questCard);
+    void insert(QuestCard questCard);
 
     @Delete
     void delete(QuestCard questCard);
 
-    @Query("SELECT * FROM questCard")
-    List<QuestCard> getAllquestCard();
+    @Query("DELETE FROM questCard_table")
+    void deleteAllQuestCard();
+
+    @Query("SELECT * FROM questCard_table")
+    LiveData<List<QuestCard>> getAllQuestCard();
 
 }
