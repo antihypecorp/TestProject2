@@ -17,7 +17,9 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +35,12 @@ public class QuestActivity extends AppCompatActivity {
     private TextView name;
     private TextView shortInfo;
     private TextView fullInfo;
+    private ImageView questPicture;
     private ConstraintLayout view;
     private QuestCardRepository questCardRepository;
     private Application application;
     private Bundle extras;
+    private android.support.v7.widget.Toolbar toolbar;
 
     private Button acceptButton;
     private Button passButton;
@@ -44,6 +48,9 @@ public class QuestActivity extends AppCompatActivity {
     private boolean accepted = false;
     private boolean passed = false;
     private String i;
+    private String title;
+    private String shortDescr;
+    private String fullDescr;
 
     final static public String KEY_NAME = "KEY_NAME";
 
@@ -51,15 +58,40 @@ public class QuestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quest);
+        toolbar = findViewById(R.id.main_toolbar);
         application = getApplication();
+        shortInfo = findViewById(R.id.quest_short_description);
         fullInfo = findViewById(R.id.quest_full_description);
+        questPicture = findViewById(R.id.main_backdrop);
 
 
         questCardRepository = new QuestCardRepository(application);
 
         LiveData<List<QuestCard>> liveData = questCardRepository.getAllQuestCards();
 
-        extras = getIntent().getExtras();
+
+
+
+        //ПРИМЕР КОДА ВЫВОДА ПОЛНОЙ ИНФОРМАЦИИ О КВЕСТЕ:
+
+        liveData.observe(QuestActivity.this, new Observer<List<QuestCard>>() {
+            @Override
+            public void onChanged(@Nullable List<QuestCard> questCards) {
+                setSupportActionBar(toolbar);
+                getSupportActionBar().setTitle(questCards.get(0).getName());
+                shortInfo.setText(questCards.get(0).getShort_info());
+                fullInfo.setText(questCards.get(0).getFull_info());
+                questPicture.setBackgroundResource(R.drawable.iqpicture);
+            }
+        });
+
+
+
+
+
+
+
+        /*extras = getIntent().getExtras();
         if(extras != null) {
             liveData.observe(QuestActivity.this, new Observer<List<QuestCard>>() {
                 @Override
@@ -73,7 +105,7 @@ public class QuestActivity extends AppCompatActivity {
                 }
             });
 
-        }
+        }*/
 
 
         //name = findViewById(R.id.quest_name_large);
@@ -96,8 +128,6 @@ public class QuestActivity extends AppCompatActivity {
         acceptButton = findViewById(R.id.accept_button);
         passButton = findViewById(R.id.pass_button);
 //        Log.d("MyLog", "ОК");
-
-
 
 
         // отправка запроса
