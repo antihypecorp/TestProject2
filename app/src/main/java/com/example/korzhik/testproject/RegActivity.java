@@ -88,6 +88,10 @@ public class RegActivity extends AppCompatActivity {
                             // Если с сервера были возвращены ошибки, то отобразить их в строке
                             final String mMessage = response.body().string();
                             if (mMessage.equals("Переданы неверные данные") |
+                                    mMessage.equals("Имя только из латиницы или кириллицы") |
+                                    mMessage.equals("Фамилия только из латиницы или кириллицы") |
+                                    mMessage.equals("Никнейм только из латиницы и цифр") |
+                                    mMessage.equals("Пароль только из латиницы и цифр") |
                                     mMessage.equals("Никнейм не менее 5 символов") |
                                     mMessage.equals("Пароль не менее 8 символов") |
                                     mMessage.equals("Пароли не совпадают") |

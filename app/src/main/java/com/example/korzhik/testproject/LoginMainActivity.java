@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -59,13 +60,13 @@ public class LoginMainActivity extends AppCompatActivity {
                     // Проверили токен на сервере, если они не совпадают, то отправляем юзера
                     // в окно авторизации, а если совпали, то в окно профиля
                     final String mMessage = response.body().string();
-
                     if (mMessage.equals("Error")) {
                         Intent intentLogin = new Intent(
                                 LoginMainActivity.this,
                                 LoginActivity.class);
                         startActivity(intentLogin);
                     } else {
+                        getInfo();
                         Intent intentEnter = new Intent(
                                 LoginMainActivity.this,
                                 MainActivity.class);
@@ -79,6 +80,34 @@ public class LoginMainActivity extends AppCompatActivity {
             // Что произойдет в случае неудачного исхода
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                // Показываем Тост с просьбой попробовать снова
+                Toast.makeText(getApplicationContext(),
+                        "Что-то пошло не так...Попробуйте снова...",
+                        Toast.LENGTH_LONG)
+                        .show();
+            }
+        });
+    }
+
+    public void getInfo() {
+        // Начали запрос
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(APILogin.HOST)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        APILogin apiLogin = retrofit.create(APILogin.class);
+
+        Call<List<UserLogin>> call = apiLogin.getUserInfo(username);
+
+        call.enqueue(new Callback<List<UserLogin>>() {
+            @Override
+            public void onResponse(Call<List<UserLogin>> call, Response<List<UserLogin>> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<List<UserLogin>> call, Throwable t) {
                 // Показываем Тост с просьбой попробовать снова
                 Toast.makeText(getApplicationContext(),
                         "Что-то пошло не так...Попробуйте снова...",
