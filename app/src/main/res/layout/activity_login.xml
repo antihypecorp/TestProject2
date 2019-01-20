@@ -8,7 +8,8 @@
     tools:context=".LoginActivity"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:id="@+id/great">
 
     <EditText
         android:id="@+id/etUsername"

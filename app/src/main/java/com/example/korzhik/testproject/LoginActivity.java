@@ -3,11 +3,13 @@ package com.example.korzhik.testproject;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etPassword;
     private Button btnLogin;
     private Button btnReg;
+    private LinearLayout view;
 
     public String username;
     public String password;
@@ -41,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnReg = findViewById(R.id.bReg);
         btnLogin = findViewById(R.id.bLogin);
+        view = findViewById(R.id.great);
 
         // Если нажали кнопку "Зарегистрироваться", то перенаправить на окно регистрации
         btnReg.setOnClickListener(new View.OnClickListener() {
@@ -108,10 +112,8 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
                         // Показываем Тост с просьбой попробовать снова
-                        Toast.makeText(LoginActivity.this,
-                                "Что-то пошло не так...Попробуйте снова",
-                                Toast.LENGTH_LONG)
-                                .show();
+                        Snackbar.make(view, "Что-то пошло не так...Попробуйте снова...",
+                                Snackbar.LENGTH_SHORT).show();
                     }
                 });
             }

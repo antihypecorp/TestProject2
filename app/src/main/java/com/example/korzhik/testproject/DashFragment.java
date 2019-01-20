@@ -33,6 +33,7 @@ public class DashFragment extends Fragment {//профиль
     private TextView tvName;
     private TextView tvLvl;
     private TextView tvCommon;
+    private TextView textStatus;
     private Button btnLogout;
 
     public String name;
@@ -72,12 +73,14 @@ public class DashFragment extends Fragment {//профиль
         chars[3] = v.findViewById(R.id.char_housekeeping);
         chars[4] = v.findViewById(R.id.char_health);
 
+        textStatus = v.findViewById(R.id.textStatus);
         btnLogout = v.findViewById(R.id.button_logout);
 
         // Вьюха имени и фамилии
         tvName = v.findViewById(R.id.name);
+        tvName.setText(username);
 
-        // Начинаем запрос
+        /*// Начинаем запрос
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(APILogin.HOST)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -109,13 +112,21 @@ public class DashFragment extends Fragment {//профиль
             public void onFailure(Call<List<UserLogin>> call, Throwable t) {
                 // SNACKBAR
             }
-        });
+        });*/
 
         // Кнопка выхода
         // Если нажата кнопка выхода, то...
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                SharedPreferences preferences = PreferenceManager
+                        .getDefaultSharedPreferences(
+                                getActivity()
+                                        .getApplicationContext());
+
+                username = preferences.getString("username", "unknown");
+                token = preferences.getString("token", "unknown");
 
                 // Начинаем запрос
                 Retrofit retrofit = new Retrofit.Builder()
@@ -125,7 +136,7 @@ public class DashFragment extends Fragment {//профиль
 
                 APILogin apiLogin = retrofit.create(APILogin.class);
 
-                Call<ResponseBody> call = apiLogin.getToken(username,token);
+                Call<ResponseBody> call = apiLogin.logoutUser(username, token);
 
                 call.enqueue(new Callback<ResponseBody>() {
 
@@ -133,25 +144,31 @@ public class DashFragment extends Fragment {//профиль
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         try {
-
                             // Если ошибки нет, то...
                             final String mMessage = response.body().string();
-
                             if (mMessage.equals("Success")) {
+
                                 // Открывается SharedPreferences для очищения данных
                                 SharedPreferences preferences
                                         = PreferenceManager
                                         .getDefaultSharedPreferences(
                                                 getActivity().getApplicationContext());
                                 SharedPreferences.Editor editor = preferences.edit();
-
                                 editor.clear();
                                 editor.apply();
 
                                 // После того, как очистили, переводит на окно авторизации
                                 startActivity(new Intent(getActivity(), LoginActivity.class));
                             } else {
-                                // SNACKBAR
+                                textStatus.setText(mMessage);
+                                SharedPreferences preferences
+                                        = PreferenceManager
+                                        .getDefaultSharedPreferences(
+                                                getActivity().getApplicationContext());
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.clear();
+                                editor.apply();
+                                startActivity(new Intent(getActivity(), LoginActivity.class));
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
