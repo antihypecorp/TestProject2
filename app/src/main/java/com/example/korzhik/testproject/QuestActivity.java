@@ -4,26 +4,23 @@ package com.example.korzhik.testproject;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
-import android.content.Intent;
-import android.support.annotation.NonNull;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
-
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,21 +33,23 @@ public class QuestActivity extends AppCompatActivity {
     private TextView shortInfo;
     private TextView fullInfo;
     private ImageView questPicture;
-    private ConstraintLayout view;
+    private CoordinatorLayout view;
     private QuestCardRepository questCardRepository;
     private Application application;
     private Bundle extras;
     private android.support.v7.widget.Toolbar toolbar;
+    String login;
 
     private Button acceptButton;
     private Button passButton;
 
     private boolean accepted = false;
     private boolean passed = false;
-    private String i;
+    private int id;
     private String title;
     private String shortDescr;
     private String fullDescr;
+    private SharedPreferences preferences;
 
     final static public String KEY_NAME = "KEY_NAME";
 
@@ -63,6 +62,9 @@ public class QuestActivity extends AppCompatActivity {
         shortInfo = findViewById(R.id.quest_short_description);
         fullInfo = findViewById(R.id.quest_full_description);
         questPicture = findViewById(R.id.main_backdrop);
+        acceptButton = findViewById(R.id.accept_button);
+        passButton = findViewById(R.id.pass_button);
+        view = findViewById(R.id.main_container);
 
 
         questCardRepository = new QuestCardRepository(application);
@@ -70,118 +72,129 @@ public class QuestActivity extends AppCompatActivity {
         LiveData<List<QuestCard>> liveData = questCardRepository.getAllQuestCards();
 
 
-
-
-        //ПРИМЕР КОДА ВЫВОДА ПОЛНОЙ ИНФОРМАЦИИ О КВЕСТЕ:
-
         liveData.observe(QuestActivity.this, new Observer<List<QuestCard>>() {
             @Override
             public void onChanged(@Nullable List<QuestCard> questCards) {
-                setSupportActionBar(toolbar);
-                getSupportActionBar().setTitle(questCards.get(0).getName());
-                shortInfo.setText(questCards.get(0).getShort_info());
-                fullInfo.setText(questCards.get(0).getFull_info());
-                questPicture.setBackgroundResource(R.drawable.iqpicture);
+                switch (getIntent().getStringExtra("idtp")) {
+                    case "1":
+                        setSupportActionBar(toolbar);
+                        getSupportActionBar().setTitle(questCards.get(0).getName());
+                        shortInfo.setText(questCards.get(0).getShort_info());
+                        fullInfo.setText(questCards.get(0).getFull_info());
+                        questPicture.setImageResource(R.drawable.iqpicture);
+                        id = questCards.get(0).getId();
+
+                        break;
+
+                    case "2":
+                        setSupportActionBar(toolbar);
+                        getSupportActionBar().setTitle(questCards.get(1).getName());
+                        shortInfo.setText(questCards.get(1).getShort_info());
+                        fullInfo.setText(questCards.get(1).getFull_info());
+                        questPicture.setBackgroundResource(R.drawable.social);
+                        id = questCards.get(1).getId();
+
+                        break;
+
+                    case "3":
+                        setSupportActionBar(toolbar);
+                        getSupportActionBar().setTitle(questCards.get(2).getName());
+                        shortInfo.setText(questCards.get(2).getShort_info());
+                        fullInfo.setText(questCards.get(2).getFull_info());
+                        questPicture.setBackgroundResource(R.drawable.charity);
+                        id = questCards.get(2).getId();
+
+                        break;
+
+                    case "4":
+                        setSupportActionBar(toolbar);
+                        getSupportActionBar().setTitle(questCards.get(3).getName());
+                        shortInfo.setText(questCards.get(3).getShort_info());
+                        fullInfo.setText(questCards.get(3).getFull_info());
+                        questPicture.setBackgroundResource(R.drawable.cleaning);
+                        id = questCards.get(3).getId();
+
+                        break;
+
+                    case "5":
+                        setSupportActionBar(toolbar);
+                        getSupportActionBar().setTitle(questCards.get(4).getName());
+                        shortInfo.setText(questCards.get(4).getShort_info());
+                        fullInfo.setText(questCards.get(4).getFull_info());
+                        questPicture.setBackgroundResource(R.drawable.health);
+                        id = questCards.get(4).getId();
+
+                        break;
+                }
             }
         });
 
 
-
-
-
-
-
-        /*extras = getIntent().getExtras();
-        if(extras != null) {
-            liveData.observe(QuestActivity.this, new Observer<List<QuestCard>>() {
-                @Override
-                public void onChanged(@Nullable List<QuestCard> questCards) {
-                    switch (extras.getString("idtp")) {
-                        case "1":
-                            fullInfo.setText(questCards.get(0).getFull_info());
-                        case "2":
-                            fullInfo.setText(questCards.get(1).getFull_info());
-                    }
-                }
-            });
-
-        }*/
-
-
-        //name = findViewById(R.id.quest_name_large);
-        //shortInfo = findViewById(R.id.quest_description_short_large);
-        //fullInfo = findViewById(R.id.quest_description_long_large);
-        //view = findViewById(R.id.great);
-
-
-        // ПОЛУЧЕНИЕ КВЕСТОВ С СЕРВЕРА
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl(APIService.HOST)
-//                .addConverterFactory(GsonConverterFactory
-//                        .create())
-//                .build();
-//
-//        APIService apiService = retrofit.create(APIService.class);
-//
-//        Call<List<QuestCard>> call = apiService.getQuestCard();
-//
-        acceptButton = findViewById(R.id.accept_button);
-        passButton = findViewById(R.id.pass_button);
-//        Log.d("MyLog", "ОК");
-
-
-        // отправка запроса
-
-
-//        call.enqueue(new Callback<List<QuestCard>>() {
-//            @Override
-//            public void onResponse(Call<List<QuestCard>> call,
-//                                   Response<List<QuestCard>> response) {
-//                List<QuestCard> questCard = response.body();
-//                Log.d("MyLog", "ЗАПРОС ПОЛУЧЕН");
-//                // ВРЕМЕННО: листы с полученными с сервера значениями имен и описаний
-//                ArrayList<String> showNames = new ArrayList<String>();
-//                ArrayList<String> showShortInfos = new ArrayList<String>();
-//                ArrayList<String> showFullInfos = new ArrayList<String>();
-//                // пушинг в листы
-//                for (QuestCard qcForeach : questCard) {
-//                    showNames.add(qcForeach.getName());
-//                    showShortInfos.add(qcForeach.getShort_info());
-//                    showFullInfos.add(qcForeach.getFull_info());
-//                }
-//                //name.setText(showNames.get(0));
-//                //shortInfo.setText(showShortInfos.get(0));
-//                //fullInfo.setText(showFullInfos.get(0));
-//            }
-//            @Override
-//            public void onFailure(Call<List<QuestCard>> call, Throwable t) {
-//                Log.d("MyLog", "ЗАПРОС НЕ ПОЛУЧЕН");
-//            }
-//        });
-
         passButton.setClickable(false);
         passButton.setEnabled(false);
 
+        // Если нажата кнопка "Взять квест", то...
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 accepted = true;
 
-                acceptButton.setEnabled(false);
-                acceptButton.setClickable(false);
-                acceptButton.setBackgroundColor(ContextCompat
-                        .getColor(QuestActivity.this,
-                                R.color.accept_button_inactive));
+                // Начинаем запрос
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(APILogin.HOST)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
 
-                passButton.setEnabled(true);
-                passButton.setClickable(true);
-                passButton.setBackgroundColor(ContextCompat
-                        .getColor(QuestActivity.this,
-                                R.color.pass_button_active));
+                APIService apiService = retrofit.create(APIService.class);
 
-                Snackbar.make(view, "Задание взято!",
-                        Snackbar.LENGTH_SHORT).show();
+                APILogin apiLogin = retrofit.create(APILogin.class);
 
+                Call<ResponseBody> call = apiService.acceptTask(id);
+
+                // Результаты запроса
+                call.enqueue(new Callback<ResponseBody>() {
+                    // Что произойдет в случае удачного исхода
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        try {
+                            // Сохраняем токен квеста в SharedPreferences
+                            final String mMessage = response.body().string();
+                            SharedPreferences preferences = PreferenceManager
+                                    .getDefaultSharedPreferences(
+                                            QuestActivity.this);
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putString("taskToken", mMessage);
+                            editor.apply();
+
+                            // Делаем кнопку "Взять квест" неактивной
+                            acceptButton.setEnabled(false);
+                            acceptButton.setClickable(false);
+                            acceptButton.setBackgroundColor(ContextCompat
+                                    .getColor(QuestActivity.this,
+                                            R.color.accept_button_inactive));
+
+                            // Делаем кнопку "Сдать квест" активной
+                            passButton.setEnabled(true);
+                            passButton.setClickable(true);
+                            passButton.setBackgroundColor(ContextCompat
+                                    .getColor(QuestActivity.this,
+                                            R.color.pass_button_active));
+
+                            // Выводим сообщение об удачном взятии задания
+                            Snackbar.make(view, "Задание взято!",
+                                    Snackbar.LENGTH_SHORT).show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    // Что произойдет в случае неудачного исхода
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Snackbar.make(view, "Проверьте подключение к интернету",
+                                Snackbar.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -190,16 +203,55 @@ public class QuestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 passed = true;
 
+                // Достаем Никнейм и Токен Из SharedPreferences для GET запроса на сервак
+                SharedPreferences preferences = PreferenceManager
+                        .getDefaultSharedPreferences(QuestActivity.this);
+                String token = preferences.getString("taskToken", "unknown");
 
-                passButton.setEnabled(false);
-                passButton.setClickable(false);
-                passButton.setBackgroundColor(ContextCompat
-                        .getColor(QuestActivity.this,
-                                R.color.pass_button_inactive));
+                // Начинаем запрос
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(APILogin.HOST)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
 
-                Snackbar.make(view, "Задание выполнено!",
-                        Snackbar.LENGTH_SHORT).show();
+                APIService apiService = retrofit.create(APIService.class);
+
+                Call<ResponseBody> call = apiService.passTask(token);
+
+                // Результаты запроса
+                call.enqueue(new Callback<ResponseBody>() {
+                    // Что произойдет в случае удачного исхода
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        try {
+                            final String mMessage = response.body().string();
+
+                            // Делаем кнопку "Сдать квест" неактивной
+                            passButton.setEnabled(false);
+                            passButton.setClickable(false);
+                            passButton.setBackgroundColor(ContextCompat
+                                    .getColor(QuestActivity.this,
+                                            R.color.pass_button_inactive));
+
+                            // Выводим сообщение об удачном выполнении задания
+                            Snackbar.make(view, "Задание выполнено!",
+                                    Snackbar.LENGTH_SHORT).show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    // Что произойдет в случае неудачного исхода
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        // Показываем Тост с просьбой попробовать снова
+                        Snackbar.make(view, "Что-то пошло не так...Попробуйте снова...",
+                                Snackbar.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
+
     }
+
 }

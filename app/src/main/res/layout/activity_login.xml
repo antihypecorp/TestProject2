@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="@color/colorBackground">
+
+    <ImageView
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:src="@drawable/icon"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="36sp"
+        android:text="Daily Quest"
+        android:textColor="@color/colorText"
+        />
+
 
     <EditText
         android:id="@+id/etUsername"
@@ -16,7 +30,11 @@
         android:layout_height="wrap_content"
         android:hint="Никнейм"
         android:padding="5dp"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:background="@color/buttonOne"
+        android:textColor="@color/colorText"
+        android:textSize="20sp"
+        android:textColorHint="@color/colorTextHint"/>
 
     <EditText
         android:id="@+id/etPassword"
@@ -24,20 +42,27 @@
         android:layout_height="wrap_content"
         android:hint="Пароль"
         android:padding="5dp"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:background="@color/buttonOne"
+        android:textColor="@color/colorText"
+        android:textSize="20sp"
+        android:textColorHint="@color/colorTextHint"/>
 
     <TextView
         android:id="@+id/answer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="@color/colorText"/>
 
     <Button
         android:id="@+id/bLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Войти"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:background="@color/buttonOne"
+        android:textColor="@color/colorText"/>
 
     <Button
         android:id="@+id/bReg"
@@ -45,6 +70,8 @@
         android:layout_height="wrap_content"
         android:text="Зарегистрироваться"
         android:gravity="center"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:background="@color/buttonOne"
+        android:textColor="@color/colorText"/>
 
 </LinearLayout>

@@ -22,11 +22,14 @@ public class LoginMainActivity extends AppCompatActivity {
 
     public String username;
     public String token;
+    private StoreQuestInfo sqi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_main);
+
+        StoreQuestInfo sqi = new StoreQuestInfo();
 
         // Из SharedPreferences достаем Никнейм и Токен для GET запроса на сервак
         SharedPreferences preferences = PreferenceManager
@@ -34,6 +37,11 @@ public class LoginMainActivity extends AppCompatActivity {
 
         username = preferences.getString("username", "unknown");
         token = preferences.getString("token", "unknown");
+
+        sqi.getAndSaveQuestInfo( getApplication() );
+
+
+
 
         // Начали запрос
         Retrofit retrofit = new Retrofit.Builder()
@@ -64,7 +72,7 @@ public class LoginMainActivity extends AppCompatActivity {
                         Intent intentEnter = new Intent(
                                 LoginMainActivity.this,
                                 MainActivity.class);
-                        startActivity(intentEnter);
+                            startActivity(intentEnter);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -78,5 +86,10 @@ public class LoginMainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

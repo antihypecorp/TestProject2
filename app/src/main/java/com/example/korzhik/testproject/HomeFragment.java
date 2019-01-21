@@ -4,11 +4,10 @@ import android.app.Application;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
-import android.arch.persistence.room.Room;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -19,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -36,11 +34,13 @@ public class HomeFragment extends Fragment implements LifecycleOwner {//нача
     TextView tvs_names[] = new TextView[5]; // массив имен квестов
     TextView tvs_shorts[] = new TextView[5]; // массив кратких описаний квестов
     View supView;
-
     private QuestCardRepository questCardRepository;
+
+
+    private SharedPreferences preferences;
     Application application;
 
-    List<QuestCard> questCard;
+
     List<QuestCard> outputQuestCard;
     LocalBDClass db;
 
@@ -71,49 +71,20 @@ public class HomeFragment extends Fragment implements LifecycleOwner {//нача
         application = getActivity().getApplication();
         questCardRepository = new QuestCardRepository(application);
 
+        LiveData<List<QuestCard>> liveData = questCardRepository.getAllQuestCards();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(APIService.HOST)
-                .addConverterFactory(GsonConverterFactory
-                        .create())
-                .build();
-
-        APIService apiService = retrofit.create(APIService.class);
-
-        Call<List<QuestCard>> call = apiService.getQuestCard();
-
-        // отправка запроса
-        call.enqueue(new Callback<List<QuestCard>>() {
+        liveData.observe(HomeFragment.this, new Observer<List<QuestCard>>() {
             @Override
-            public void onResponse(Call<List<QuestCard>> call,
-                                   Response<List<QuestCard>> response) {
-
-
-                questCard = response.body();
-                Log.d("MyLog", "ЗАПРОС ПОЛУЧЕН");
-
-                for (QuestCard qcForeach : questCard) {
-                    questCardRepository.insert(qcForeach);
-                }
-                LiveData<List<QuestCard>> liveData = questCardRepository.getAllQuestCards();
-
-                liveData.observe(HomeFragment.this, new Observer<List<QuestCard>>() {
-                    @Override
-                    public void onChanged(@Nullable List<QuestCard> questCards) {
-                        for (int i = 0; i < 5; ++i) {
+            public void onChanged(@Nullable List<QuestCard> questCards) {
+                for (int i = 0; i < 5; ++i) {
                             tvs_names[i].setText(questCards.get(i).getName());
                             tvs_shorts[i].setText(questCards.get(i).getShort_info());
-                        }
-                    }
-                });
-
-            }
-
-            @Override
-            public void onFailure(Call<List<QuestCard>> call, Throwable t) {
-                Log.d("MyLog", "ЗАПРОС НЕ ПОЛУЧЕН");
+                }
             }
         });
+
+
+
 
 
         for (int i = 0; i < 5; ++i) {
@@ -121,14 +92,13 @@ public class HomeFragment extends Fragment implements LifecycleOwner {//нача
             exs[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    switch (supView.getId()) {
+                    switch (view.getId()) {
                         case R.id.ex_1:
                             Intent intentFirst = new Intent(
                                     getActivity(),
                                     QuestActivity.class);
                             intentFirst.putExtra("idtp", "1");
-                            getActivity().startActivity(intentFirst);
-
+                            startActivity(intentFirst);
                             break;
 
                         case R.id.ex_2:
@@ -140,18 +110,48 @@ public class HomeFragment extends Fragment implements LifecycleOwner {//нача
 
                             break;
 
+                        case R.id.ex_3:
+                            Intent intentThird = new Intent(
+                                    getActivity(),
+                                    QuestActivity.class);
+                            intentThird.putExtra("idtp", "3");
+                            startActivity(intentThird);
 
+                            break;
+
+                        case R.id.ex_4:
+                            Intent intentFourth = new Intent(
+                                    getActivity(),
+                                    QuestActivity.class);
+                            intentFourth.putExtra("idtp", "4");
+                            startActivity(intentFourth);
+
+                            break;
+
+                        case R.id.ex_5:
+                            Intent intentFifth = new Intent(
+                                    getActivity(),
+                                    QuestActivity.class);
+                            intentFifth.putExtra("idtp", "5");
+                            startActivity(intentFifth);
+
+                            break;
                     }
-
-                    Intent intent = new Intent(getActivity(), QuestActivity.class);
-                    intent.putExtra(QuestActivity.KEY_NAME, name);
-                    startActivity(intent);
                 }
             });
         }
+
+        // ЗАНЕСЕНИЕ ИЗ БД В SHARED PREFS
+
+//        SharedPreferences preferences = PreferenceManager
+//                .getDefaultSharedPreferences(RegActivity.this);
+//        SharedPreferences.Editor editor = preferences.edit();
+//        editor.putString("fullname", name + " " + surname);
+//        editor.putString("username", username);
+//        editor.putString("token", mMessage);
+//        editor.apply();
+
         return supView;
     }
-
-
 
 }

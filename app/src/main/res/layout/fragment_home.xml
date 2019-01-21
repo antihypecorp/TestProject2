@@ -5,7 +5,8 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/colorBackground">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,7 +15,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <TextView
                 android:id="@+id/divider_1"
@@ -23,13 +25,14 @@
                 android:layout_weight="1"
                 android:padding="16dp"
                 android:text="Ежедневные задания"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="@color/colorText"/>
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp">
+                app:cardBackgroundColor="@color/colorCardBackground"
+                >
 
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/ex_1"
@@ -37,7 +40,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:layout_weight="1"
-                    tools:ignore="OnClick">
+                    tools:ignore="OnClick"
+                    >
 
                     <ImageView
                         android:id="@+id/quest_1_pic"
@@ -47,7 +51,8 @@
                         app:layout_constraintEnd_toStartOf="@id/quest_1_name"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_intel" />
+                        app:srcCompat="@mipmap/iqpicture_round"
+                        />
 
                     <TextView
                         android:id="@+id/quest_1_name"
@@ -56,8 +61,10 @@
                         android:paddingStart="16dp"
                         android:text="Задание 1"
                         android:textSize="24sp"
+                        app:layout_constraintBottom_toTopOf="@+id/quest_1_short_description"
                         app:layout_constraintStart_toEndOf="@id/quest_1_pic"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:textColor="@color/colorText"/>
 
                     <TextView
                         android:id="@+id/quest_1_short_description"
@@ -66,7 +73,8 @@
                         android:paddingTop="8dp"
                         android:text="Краткое описание задания 1"
                         android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textColor="@color/colorText"/>
 
 
                 </android.support.constraint.ConstraintLayout>
@@ -78,9 +86,8 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="16dp">
+                app:cardBackgroundColor="@color/colorCardBackground">
 
 
                 <android.support.constraint.ConstraintLayout
@@ -98,7 +105,7 @@
                         app:layout_constraintEnd_toStartOf="@id/quest_2_name"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@mipmap/ic_launcher_round" />
+                        app:srcCompat="@mipmap/socicon_round" />
 
                     <TextView
                         android:id="@+id/quest_2_name"
@@ -107,8 +114,10 @@
                         android:paddingStart="16dp"
                         android:text="Задание 2"
                         android:textSize="24sp"
+                        app:layout_constraintBottom_toTopOf="@+id/quest_2_short_description"
                         app:layout_constraintStart_toEndOf="@id/quest_2_pic"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:textColor="@color/colorText"/>
 
                     <TextView
                         android:id="@+id/quest_2_short_description"
@@ -117,7 +126,8 @@
                         android:paddingTop="8dp"
                         android:text="Краткое описание задания 2"
                         android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textColor="@color/colorText"/>
 
 
                 </android.support.constraint.ConstraintLayout>
@@ -128,9 +138,8 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="16dp">
+                app:cardBackgroundColor="@color/colorCardBackground">
 
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/ex_3"
@@ -147,7 +156,7 @@
                         app:layout_constraintEnd_toStartOf="@id/quest_3_name"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@mipmap/ic_launcher_round" />
+                        app:srcCompat="@mipmap/charityicon" />
 
                     <TextView
                         android:id="@+id/quest_3_name"
@@ -156,8 +165,10 @@
                         android:paddingStart="16dp"
                         android:text="Задание 3"
                         android:textSize="24sp"
+                        app:layout_constraintBottom_toTopOf="@+id/quest_3_short_description"
                         app:layout_constraintStart_toEndOf="@id/quest_3_pic"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:textColor="@color/colorText"/>
 
                     <TextView
                         android:id="@+id/quest_3_short_description"
@@ -166,7 +177,8 @@
                         android:paddingTop="8dp"
                         android:text="Краткое описание задания 3"
                         android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textColor="@color/colorText"/>
 
 
                 </android.support.constraint.ConstraintLayout>
@@ -176,9 +188,9 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="16dp">
+                app:cardBackgroundColor="@color/colorCardBackground"
+                >
 
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/ex_4"
@@ -195,7 +207,7 @@
                         app:layout_constraintEnd_toStartOf="@id/quest_4_name"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@mipmap/ic_launcher_round" />
+                        app:srcCompat="@mipmap/mopicon" />
 
                     <TextView
                         android:id="@+id/quest_4_name"
@@ -204,8 +216,10 @@
                         android:paddingStart="16dp"
                         android:text="Задание 4"
                         android:textSize="24sp"
+                        app:layout_constraintBottom_toTopOf="@+id/quest_4_short_description"
                         app:layout_constraintStart_toEndOf="@id/quest_4_pic"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:textColor="@color/colorText"/>
 
                     <TextView
                         android:id="@+id/quest_4_short_description"
@@ -214,7 +228,8 @@
                         android:paddingTop="8dp"
                         android:text="Краткое описание задания 4"
                         android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textColor="@color/colorText"/>
 
 
                 </android.support.constraint.ConstraintLayout>
@@ -224,9 +239,8 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="16dp">
+                app:cardBackgroundColor="@color/colorCardBackground">
 
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/ex_5"
@@ -245,7 +259,7 @@
                         app:layout_constraintEnd_toStartOf="@id/quest_5_name"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@mipmap/ic_launcher_round" />
+                        app:srcCompat="@mipmap/handicon" />
 
                     <TextView
                         android:id="@+id/quest_5_name"
@@ -254,8 +268,10 @@
                         android:paddingStart="16dp"
                         android:text="Задание 5"
                         android:textSize="24sp"
+                        app:layout_constraintBottom_toTopOf="@+id/quest_5_short_description"
                         app:layout_constraintStart_toEndOf="@id/quest_5_pic"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:textColor="@color/colorText"/>
 
                     <TextView
                         android:id="@+id/quest_5_short_description"
@@ -264,7 +280,8 @@
                         android:paddingTop="8dp"
                         android:text="Краткое описание задания 5"
                         android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textColor="@color/colorText"/>
 
 
                 </android.support.constraint.ConstraintLayout>
@@ -272,12 +289,13 @@
             </android.support.v7.widget.CardView>
 
             <TextView
-                android:id="@+id/divider_2"
+                android:id="@+id/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="16dp"
-                android:text="Раздел 2" />
+                android:paddingTop="8dp"
+                android:text="\n \n"
+                android:textSize="16sp"
+                />
 
         </LinearLayout>
 

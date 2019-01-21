@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/great_reg"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,54 +9,104 @@
     tools:context=".RegActivity"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="25dp">
+    android:padding="25dp"
+    android:background="@color/colorBackground">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/icon"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="Daily Quest"
+        android:textColor="@color/colorText"
+        />
 
     <EditText
         android:id="@+id/etName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Имя"/>
+        android:hint="Имя"
+        android:background="@color/buttonOne"
+        android:textColor="@color/colorText"
+        android:textSize="20sp"
+        android:textColorHint="@color/colorTextHint"
+        android:layout_margin="8dp"
+        android:padding="2dp"/>
 
     <EditText
         android:id="@+id/etSurname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Фамилия"/>
+        android:hint="Фамилия"
+        android:background="@color/buttonOne"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"
+        android:layout_margin="8dp"
+        android:padding="2dp"/>
 
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Логин"/>
+        android:hint="Логин"
+        android:background="@color/buttonOne"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"
+        android:layout_margin="8dp"
+        android:padding="2dp"/>
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Пароль"/>
+        android:hint="Пароль"
+        android:inputType="textPassword"
+        android:background="@color/buttonOne"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"
+        android:layout_margin="8dp"
+        android:padding="4dp"/>
 
     <EditText
         android:id="@+id/etConfPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Подтвердить пароль"/>
+        android:hint="Подтвердить пароль"
+        android:inputType="textPassword"
+        android:background="@color/buttonOne"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"
+        android:layout_margin="8dp"
+        android:padding="4dp"/>
 
     <TextView
         android:id="@+id/answer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:layout_margin="8dp"
+        android:padding="2dp"
+        />
 
     <Button
         android:id="@+id/bLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Зарегистрироваться"/>
+        android:text="Зарегистрироваться"
+        android:layout_margin="4dp"
+        android:padding="2dp"
+        />
 
     <Button
         android:id="@+id/bBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Вернуться назад"/>
+        android:text="Вернуться назад"
+        android:layout_margin="4dp"
+        android:padding="2dp"/>
 
 </LinearLayout>

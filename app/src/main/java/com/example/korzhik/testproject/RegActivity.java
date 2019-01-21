@@ -3,11 +3,13 @@ package com.example.korzhik.testproject;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,11 +31,13 @@ public class RegActivity extends AppCompatActivity {
     private EditText etPassword;
     private Button btnLogin;
     private Button btnBack;
+    private LinearLayout view;
 
     public String name;
     public String surname;
     public String username;
     public String password;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +51,7 @@ public class RegActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnBack = findViewById(R.id.bBack);
         btnLogin = findViewById(R.id.bLogin);
-
+        view = findViewById(R.id.great_reg);
         // Если нажали кнопку "Вернуться назад", то возвращаем пользователя назад
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +103,7 @@ public class RegActivity extends AppCompatActivity {
                                 SharedPreferences preferences = PreferenceManager
                                         .getDefaultSharedPreferences(RegActivity.this);
                                 SharedPreferences.Editor editor = preferences.edit();
+                                editor.putString("fullname", name + " " + surname);
                                 editor.putString("username", username);
                                 editor.putString("token", mMessage);
                                 editor.apply();
@@ -115,10 +120,8 @@ public class RegActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
                         // Показываем Тост с просьбой попробовать снова
-                        Toast.makeText(RegActivity.this,
-                                "Что-то пошло не так...Попробуйте снова",
-                                Toast.LENGTH_LONG)
-                                .show();
+                        Snackbar.make(view, "Проверьте подключение к интернету",
+                                Snackbar.LENGTH_SHORT).show();
                     }
                 });
             }

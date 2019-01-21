@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -63,8 +64,6 @@ public class DashFragment extends Fragment {//профиль
         surname = preferences.getString("surname", "unknown");
         username = preferences.getString("username", "unknown");
         token = preferences.getString("token", "unknown");
-
-
         v = inflater.inflate(R.layout.fragment_dash, container, false);
         chars[0] = v.findViewById(R.id.char_intelligence);
         chars[1] = v.findViewById(R.id.char_social);
@@ -107,7 +106,8 @@ public class DashFragment extends Fragment {//профиль
             // Что произойдет в случае неудачного исхода
             @Override
             public void onFailure(Call<List<UserLogin>> call, Throwable t) {
-                // SNACKBAR
+                Snackbar.make(DashFragment.this.v, "Проверьте подключение к интернету",
+                        Snackbar.LENGTH_SHORT).show();
             }
         });
 
@@ -151,7 +151,8 @@ public class DashFragment extends Fragment {//профиль
                                 // После того, как очистили, переводит на окно авторизации
                                 startActivity(new Intent(getActivity(), LoginActivity.class));
                             } else {
-                                // SNACKBAR
+                                Snackbar.make(DashFragment.this.v, "Проверьте подключение к интернету",
+                                        Snackbar.LENGTH_SHORT).show();
                             }
                         } catch (IOException e) {
                             e.printStackTrace();

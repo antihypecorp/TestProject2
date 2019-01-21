@@ -11,7 +11,7 @@ public class QuestCard {
     private int idtable;
 
 
-    private String id;
+    private int id;
 
     private String name;
     private String short_info;
@@ -24,7 +24,7 @@ public class QuestCard {
         this.idtable = idtable;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -53,7 +53,7 @@ public class QuestCard {
         return idtable;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

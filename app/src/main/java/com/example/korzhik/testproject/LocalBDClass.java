@@ -28,27 +28,27 @@ public abstract class LocalBDClass extends RoomDatabase {
         return instance;
     }
 
-    private static  RoomDatabase.Callback roomCallback =
-            new RoomDatabase.Callback() {
-                @Override
-                public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                    super.onCreate(db);
-                }
-            };
-
-    private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
-
-        private QuestCardDAO questCardDAO;
-
-        public PopulateDbAsyncTask(LocalBDClass db) {
-            questCardDAO = db.questCardDAO();
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            questCardDAO.insert(new QuestCard());
-            return null;
-        }
-    }
+//    private static  RoomDatabase.Callback roomCallback =
+//            new RoomDatabase.Callback() {
+//                @Override
+//                public void onCreate(@NonNull SupportSQLiteDatabase db) {
+//                    super.onCreate(db);
+//                }
+//            };
+//
+//    private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
+//
+//        private QuestCardDAO questCardDAO;
+//
+//        public PopulateDbAsyncTask(LocalBDClass db) {
+//            questCardDAO = db.questCardDAO();
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Void... voids) {
+//            questCardDAO.insert(new QuestCard());
+//            return null;
+//        }
+//    }
 
 }
