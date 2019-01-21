@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginMainActivity extends AppCompatActivity {
 
     private LinearLayout view;
+    private TextView statusText;
 
     public String username;
     public String token;
@@ -33,6 +35,7 @@ public class LoginMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_main);
 
         view = findViewById(R.id.great);
+        statusText = findViewById(R.id.statusText);
 
         // Из SharedPreferences достаем Никнейм и Токен для GET запроса на сервак
         SharedPreferences preferences = PreferenceManager
@@ -89,7 +92,7 @@ public class LoginMainActivity extends AppCompatActivity {
         });
     }
 
-    public void getInfo() {
+    public void getInfo() throws IOException {
         // Начали запрос
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(APILogin.HOST)
@@ -98,16 +101,21 @@ public class LoginMainActivity extends AppCompatActivity {
 
         APILogin apiLogin = retrofit.create(APILogin.class);
 
-        Call<List<UserLogin>> call = apiLogin.getUserInfo(username);
+        Call<ResponseBody> call = apiLogin.getUserInfo(username);
 
-        call.enqueue(new Callback<List<UserLogin>>() {
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<List<UserLogin>> call, Response<List<UserLogin>> response) {
-
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    final String text = response.body().string();
+                    statusText.setText(text);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
-            public void onFailure(Call<List<UserLogin>> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 // Показываем Тост с просьбой попробовать снова
                 Toast.makeText(getApplicationContext(),
                         "Что-то пошло не так...Попробуйте снова...",

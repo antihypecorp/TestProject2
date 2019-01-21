@@ -21,6 +21,9 @@ public class UserLogin {
     @SerializedName("password")
     public String password;
 
+    @SerializedName("passwordConf")
+    public String passwordConf;
+
     @SerializedName("token")
     public String token;
 
@@ -32,11 +35,12 @@ public class UserLogin {
         this.username = username;
     }
 
-    public UserLogin(String name, String surname, String username, String password) {
+    public UserLogin(String name, String surname, String username, String password, String passwordConf) {
         this.name = name;
         this.surname = surname;
         this.username = username;
         this.password = password;
+        this.passwordConf = passwordConf;
     }
 
     public UserLogin(String username, String password) {
@@ -90,6 +94,14 @@ public class UserLogin {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPasswordConf() {
+        return passwordConf;
+    }
+
+    public void setPasswordConf(String passwordConf) {
+        this.passwordConf = passwordConf;
     }
 
     public String getToken() {

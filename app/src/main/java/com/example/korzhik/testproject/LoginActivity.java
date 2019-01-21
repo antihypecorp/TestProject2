@@ -64,60 +64,70 @@ public class LoginActivity extends AppCompatActivity {
                 // К нашим публичным строкам присваиваем значения из полей
                 username = etUsername.getText().toString();
                 password = etPassword.getText().toString();
+                TextView answer = (TextView) findViewById(R.id.answer);
 
-                // Начали запрос
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(APILogin.HOST)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-                APILogin apiLogin = retrofit.create(APILogin.class);
-
-                Call<ResponseBody> call = apiLogin.loginUser(username, password);
-
-                call.enqueue(new Callback<ResponseBody>() {
-                    // Что произойдет в случае удачного исхода
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        TextView answer = (TextView) findViewById(R.id.answer);
-                        try {
-                            // Если с сервера не были возвращены ошибки, то...
-                            final String mMessage = response.body().string();
-                            if (!mMessage.equals("Пользователя с таким ником не существует")) {
-                                if (!mMessage.equals("Введен неверный пароль")) {
-                                    SharedPreferences preferences = PreferenceManager
-                                            .getDefaultSharedPreferences(
-                                                    LoginActivity.this);
-                                    SharedPreferences.Editor editor = preferences.edit();
-                                    editor.putString("username", username);
-                                    editor.putString("token", mMessage);
-                                    editor.apply();
-                                    Intent intentReged = new Intent(
-                                            LoginActivity.this,
-                                            MainActivity.class);
-                                    startActivity(intentReged);
-                                } else {
-                                    answer.setText(mMessage);
-                                }
-                            } else {
-                                answer.setText(mMessage);
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-
-                    // Что произойдет в случае неудачного исхода
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        // Показываем Тост с просьбой попробовать снова
-                        Snackbar.make(view, "Что-то пошло не так...Попробуйте снова...",
-                                Snackbar.LENGTH_SHORT).show();
-                    }
-                });
+                if (username.matches("^[a-zA-Z0-9]+$") &&
+                        password.matches("^[a-zA-Z0-9]+$")) {
+                    LoginUser();
+                } else if (username.equals("") | password.equals("")) {
+                    answer.setText("Заполните пустые поля");
+                }
             }
         });
 
+    }
+
+    public void LoginUser() {
+        // Начали запрос
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(APILogin.HOST)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        APILogin apiLogin = retrofit.create(APILogin.class);
+
+        Call<ResponseBody> call = apiLogin.loginUser(username, password);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            // Что произойдет в случае удачного исхода
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                TextView answer = (TextView) findViewById(R.id.answer);
+                try {
+                    // Если с сервера не были возвращены ошибки, то...
+                    final String mMessage = response.body().string();
+                    if (!mMessage.equals("Пользователя с таким ником не существует")) {
+                        if (!mMessage.equals("Введен неверный пароль")) {
+                            SharedPreferences preferences = PreferenceManager
+                                    .getDefaultSharedPreferences(
+                                            LoginActivity.this);
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putString("username", username);
+                            editor.putString("token", mMessage);
+                            editor.apply();
+                            Intent intentReged = new Intent(
+                                    LoginActivity.this,
+                                    MainActivity.class);
+                            startActivity(intentReged);
+                        } else {
+                            answer.setText(mMessage);
+                        }
+                    } else {
+                        answer.setText(mMessage);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            // Что произойдет в случае неудачного исхода
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                // Показываем Тост с просьбой попробовать снова
+                Snackbar.make(view, "Что-то пошло не так...Попробуйте снова...",
+                        Snackbar.LENGTH_SHORT).show();
+            }
+        });
     }
 }

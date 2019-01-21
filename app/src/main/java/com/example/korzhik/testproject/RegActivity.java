@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +28,7 @@ public class RegActivity extends AppCompatActivity {
     private EditText etSurname;
     private EditText etUsername;
     private EditText etPassword;
+    private EditText etPasswordConf;
     private Button btnLogin;
     private Button btnBack;
 
@@ -34,6 +36,7 @@ public class RegActivity extends AppCompatActivity {
     public String surname;
     public String username;
     public String password;
+    public String passwordConf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class RegActivity extends AppCompatActivity {
         etSurname = findViewById(R.id.etSurname);
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
+        etPasswordConf = findViewById(R.id.etConfPassword);
         btnBack = findViewById(R.id.bBack);
         btnLogin = findViewById(R.id.bLogin);
 
@@ -68,8 +72,29 @@ public class RegActivity extends AppCompatActivity {
                 surname = etSurname.getText().toString();
                 username = etUsername.getText().toString();
                 password = etPassword.getText().toString();
+                passwordConf = etPasswordConf.getText().toString();
+                TextView answer = (TextView) findViewById(R.id.answer);
 
-                // Начинаем запрос
+                if (name.matches("^[а-яА-ЯёЁa-zA-Z]+$") &&
+                        surname.matches("^[а-яА-ЯёЁa-zA-Z]+$") &&
+                        username.matches("^[a-zA-Z0-9]+$") &&
+                        password.matches("^[a-zA-Z0-9]+$")) {
+                    RegisterUser();
+                } else if (name.equals("") | surname.equals("") | username.equals("") | password.equals("")) {
+                    answer.setText("Заполните пустые поля");
+                } else if (name.length() < 3 | surname.length() < 3) {
+                    answer.setText("Имя и Фамилия не менее 3-х символов");
+                } else if (username.length() < 5 | password.length() < 8) {
+                    answer.setText("Никнейм не менее 5 и пароль не менее 8 символов");
+                } else if (!password.equals(passwordConf)) {
+                    answer.setText("Пароли не совпадают");
+                }
+            }
+        });
+    }
+
+    public void RegisterUser() {
+          // Начинаем запрос
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(APILogin.HOST)
                         .addConverterFactory(GsonConverterFactory.create())
@@ -85,31 +110,16 @@ public class RegActivity extends AppCompatActivity {
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         TextView answer = (TextView) findViewById(R.id.answer);
                         try {
-                            // Если с сервера были возвращены ошибки, то отобразить их в строке
                             final String mMessage = response.body().string();
-                            if (mMessage.equals("Переданы неверные данные") |
-                                    mMessage.equals("Имя только из латиницы или кириллицы") |
-                                    mMessage.equals("Фамилия только из латиницы или кириллицы") |
-                                    mMessage.equals("Никнейм только из латиницы и цифр") |
-                                    mMessage.equals("Пароль только из латиницы и цифр") |
-                                    mMessage.equals("Никнейм не менее 5 символов") |
-                                    mMessage.equals("Пароль не менее 8 символов") |
-                                    mMessage.equals("Пароли не совпадают") |
-                                    mMessage.equals("Пользователь с таким ником уже зарегистрирован")) {
-                                answer.setText(mMessage);
-                            } else {
-                                // Если с сервера не были возвращены ошибки, то...
-                                // Открываем SharedPreferences и сохраняем в него Никнейм и токен
-                                SharedPreferences preferences = PreferenceManager
-                                        .getDefaultSharedPreferences(RegActivity.this);
-                                SharedPreferences.Editor editor = preferences.edit();
-                                editor.putString("username", username);
-                                editor.putString("token", mMessage);
-                                editor.apply();
-                                // Перекидываем пользователя на страницу профиля
-                                startActivity(new Intent(RegActivity.this,
-                                        MainActivity.class));
-                            }
+                            SharedPreferences preferences = PreferenceManager
+                                    .getDefaultSharedPreferences(RegActivity.this);
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putString("username", username);
+                            editor.putString("token", mMessage);
+                            editor.apply();
+                            // Перекидываем пользователя на страницу профиля
+                            startActivity(new Intent(RegActivity.this,
+                                    MainActivity.class));
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -125,7 +135,5 @@ public class RegActivity extends AppCompatActivity {
                                 .show();
                     }
                 });
-            }
-        });
     }
 }
