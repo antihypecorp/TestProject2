@@ -75,7 +75,9 @@ public class RegActivity extends AppCompatActivity {
                 passwordConf = etPasswordConf.getText().toString();
                 TextView answer = (TextView) findViewById(R.id.answer);
 
-                if (name.matches("^[а-яА-ЯёЁa-zA-Z]+$") &&
+                RegisterUser();
+
+                /*if (name.matches("^[а-яА-ЯёЁa-zA-Z]+$") &&
                         surname.matches("^[а-яА-ЯёЁa-zA-Z]+$") &&
                         username.matches("^[a-zA-Z0-9]+$") &&
                         password.matches("^[a-zA-Z0-9]+$")) {
@@ -88,7 +90,7 @@ public class RegActivity extends AppCompatActivity {
                     answer.setText("Никнейм не менее 5 и пароль не менее 8 символов");
                 } else if (!password.equals(passwordConf)) {
                     answer.setText("Пароли не совпадают");
-                }
+                }*/
             }
         });
     }
@@ -111,6 +113,7 @@ public class RegActivity extends AppCompatActivity {
                         TextView answer = (TextView) findViewById(R.id.answer);
                         try {
                             final String mMessage = response.body().string();
+                            answer.setText(mMessage);
                             SharedPreferences preferences = PreferenceManager
                                     .getDefaultSharedPreferences(RegActivity.this);
                             SharedPreferences.Editor editor = preferences.edit();
