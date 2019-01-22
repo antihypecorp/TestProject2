@@ -20,11 +20,13 @@ public interface APIService {
 
     // GET запрос, регистрирующий взятие Квеста
     @GET("tasks/logic/accept.php")
-    Call<ResponseBody> acceptTask(@Query("id") int id);
+    Call<ResponseBody> acceptTask(@Query("username") String username,
+                                  @Query("id") int id);
 
     // GET запрос, регистрирующий выполнение Квеста
     @GET("tasks/logic/pass.php")
-    Call<ResponseBody> passTask(@Query("token") String token);
+    Call<ResponseBody> passTask(@Query("username") String username,
+                                @Query("token") String token);
 
     // POST запрос, регистрирующий выполнение Квеста
     @FormUrlEncoded

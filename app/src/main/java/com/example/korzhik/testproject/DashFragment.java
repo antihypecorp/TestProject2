@@ -75,12 +75,12 @@ public class DashFragment extends Fragment {//профиль
         token = preferences.getString("token", "unknown");
 
         lvl = preferences.getInt("lvl", 20);
-//        number = preferences.getInt("number", 30);
-//        iq = preferences.getInt("iq", 30);
-//        social = preferences.getInt("social", 30);
-//        charity = preferences.getInt("charity", 30);
-//        home = preferences.getInt("home", 30);
-//        health = preferences.getInt("health", 30);
+        number = preferences.getInt("number", 30);
+        iq = preferences.getInt("iq", 30);
+        social = preferences.getInt("social", 30);
+        charity = preferences.getInt("charity", 30);
+        home = preferences.getInt("home", 30);
+        health = preferences.getInt("health", 30);
 
         v = inflater.inflate(R.layout.fragment_dash, container, false);
 
@@ -101,55 +101,15 @@ public class DashFragment extends Fragment {//профиль
         homeValue= v.findViewById(R.id.value_housekeeping);
         healthValue = v.findViewById(R.id.value_health);
 
-        tvName.setText(fullname);
-        tvLvl.setText(Integer.toString(lvl));
-        tvNumber.setText(Integer.toString(number));
+        tvName.setText(username);
+        tvLvl.setText("Уровень: " + Integer.toString(lvl));
+        tvNumber.setText("Опыт: " + Integer.toString(number));
+        iqValue.setText(Integer.toString(iq));
+        socialValue.setText(Integer.toString(social));
+        charityValue.setText(Integer.toString(charity));
+        homeValue.setText(Integer.toString(home));
+        healthValue.setText(Integer.toString(health));
 
-
-
-
-
-
-
-
-
-
-
-
-        // Начинаем запрос
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl(APILogin.HOST)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//
-//        APILogin apiLogin = retrofit.create(APILogin.class);
-//
-//        Call<List<UserLogin>> call = apiLogin.getUserInfo(username);
-//
-//        call.enqueue(new Callback<List<UserLogin>>() {
-//            // Что произойдет в случае удачного исхода
-//            @Override
-//            public void onResponse(Call<List<UserLogin>> call,
-//                                   Response<List<UserLogin>> response) {
-//                List<UserLogin> posts = response.body();
-//
-//                // Цикл, выводящий данные на Вьюкшку
-//                for (UserLogin userLogin : posts) {
-//                    String name = "";
-//
-//                    name += userLogin.getName() + " " + userLogin.getSurname();
-//
-//                    tvName.setText(name);
-//                }
-//            }
-//
-//            // Что произойдет в случае неудачного исхода
-//            @Override
-//            public void onFailure(Call<List<UserLogin>> call, Throwable t) {
-//                Snackbar.make(DashFragment.this.v, "Проверьте подключение к интернету",
-//                        Snackbar.LENGTH_SHORT).show();
-//            }
-//        });
         btnLogout = v.findViewById(R.id.button_logout);
 
 
@@ -168,7 +128,7 @@ public class DashFragment extends Fragment {//профиль
 
                 APILogin apiLogin = retrofit.create(APILogin.class);
 
-                Call<ResponseBody> call = apiLogin.getToken(username,token);
+                Call<ResponseBody> call = apiLogin.getToken(username, token);
 
                 call.enqueue(new Callback<ResponseBody>() {
 
@@ -187,7 +147,6 @@ public class DashFragment extends Fragment {//профиль
                                         .getDefaultSharedPreferences(
                                                 getActivity().getApplicationContext());
                                 SharedPreferences.Editor editor = preferences.edit();
-
                                 editor.clear();
                                 editor.apply();
 
@@ -205,7 +164,9 @@ public class DashFragment extends Fragment {//профиль
                     // Что произойдет в случае неудачного исхода
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        // SNACKBAR
+                        Snackbar.make(DashFragment.this.v,
+                                "Что-то пошло не так... Попробуйте снова...",
+                                Snackbar.LENGTH_SHORT).show();
                     }
                 });
             }

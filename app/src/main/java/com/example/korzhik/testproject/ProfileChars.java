@@ -20,6 +20,7 @@ public class ProfileChars {
 
     @SerializedName("home_economics")
     public int homeEconomics;
+
     @SerializedName("physical_activity")
     public int physicalActivity;
 

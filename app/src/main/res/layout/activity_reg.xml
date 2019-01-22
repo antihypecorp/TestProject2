@@ -35,7 +35,7 @@
         android:textSize="20sp"
         android:textColorHint="@color/colorTextHint"
         android:layout_margin="8dp"
-        android:padding="2dp"/>
+        android:padding="6dp"/>
 
     <EditText
         android:id="@+id/etSurname"
@@ -45,8 +45,9 @@
         android:background="@color/buttonOne"
         android:textColor="@color/colorText"
         android:textColorHint="@color/colorTextHint"
+        android:textSize="20sp"
         android:layout_margin="8dp"
-        android:padding="2dp"/>
+        android:padding="6dp"/>
 
     <EditText
         android:id="@+id/etUsername"
@@ -57,7 +58,8 @@
         android:textColor="@color/colorText"
         android:textColorHint="@color/colorTextHint"
         android:layout_margin="8dp"
-        android:padding="2dp"/>
+        android:padding="6dp"
+        android:textSize="20sp"/>
 
     <EditText
         android:id="@+id/etPassword"
@@ -69,7 +71,8 @@
         android:textColor="@color/colorText"
         android:textColorHint="@color/colorTextHint"
         android:layout_margin="8dp"
-        android:padding="4dp"/>
+        android:padding="6dp"
+        android:textSize="20sp"/>
 
     <EditText
         android:id="@+id/etConfPassword"
@@ -81,7 +84,8 @@
         android:textColor="@color/colorText"
         android:textColorHint="@color/colorTextHint"
         android:layout_margin="8dp"
-        android:padding="4dp"/>
+        android:padding="6dp"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/answer"
@@ -99,6 +103,8 @@
         android:text="Зарегистрироваться"
         android:layout_margin="4dp"
         android:padding="2dp"
+        android:background="@color/buttonOne"
+        android:textColor="@color/colorText"
         />
 
     <Button
@@ -107,6 +113,9 @@
         android:layout_height="wrap_content"
         android:text="Вернуться назад"
         android:layout_margin="4dp"
-        android:padding="2dp"/>
+        android:padding="2dp"
+        android:background="@color/buttonOne"
+        android:textColor="@color/colorText"
+        />
 
 </LinearLayout>

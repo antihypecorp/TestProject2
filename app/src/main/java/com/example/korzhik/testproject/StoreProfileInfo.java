@@ -50,6 +50,12 @@ public class StoreProfileInfo {
                             .getDefaultSharedPreferences(context);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putInt("lvl", profileChars1.getLvl());
+                    editor.putInt("number", profileChars1.getNumber());
+                    editor.putInt("iq", profileChars1.getIntelligence());
+                    editor.putInt("social", profileChars1.getSocialSkills());
+                    editor.putInt("charity", profileChars1.getFriendliness());
+                    editor.putInt("home", profileChars1.getHomeEconomics());
+                    editor.putInt("health", profileChars1.getPhysicalActivity());
                     editor.apply();
                 }
             }
@@ -59,30 +65,5 @@ public class StoreProfileInfo {
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
             }
         });
-
-        /*call.enqueue(new Callback<ProfileChars>() {
-            @Override
-            public void onResponse(Call<ProfileChars> call, Response<ProfileChars> response) {
-
-                profileChars = response.body();
-                SharedPreferences preferences = PreferenceManager
-                        .getDefaultSharedPreferences(context);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putInt("lvl", profileChars.getLvl());
-//                editor.putInt("Number", profileChars.getNumber());
-//                editor.putInt("iq", profileChars.getIntelligence());
-//                editor.putInt("social", profileChars.getSocialSkills());
-//                editor.putInt("charity", profileChars.getFriendliness());
-//                editor.putInt("home", profileChars.getHomeEconomics());
-//                editor.putInt("health", profileChars.getPhysicalActivity());
-                editor.apply();
-
-            }
-
-            @Override
-            public void onFailure(Call<ProfileChars> call, Throwable t) {
-                Toast.makeText(context, "Ошибка", Toast.LENGTH_SHORT);
-            }
-        });*/
     }
 }

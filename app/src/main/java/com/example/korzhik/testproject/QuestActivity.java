@@ -51,6 +51,9 @@ public class QuestActivity extends AppCompatActivity {
     private String fullDescr;
     private SharedPreferences preferences;
 
+    public String username;
+    public String token;
+
     final static public String KEY_NAME = "KEY_NAME";
 
     @Override
@@ -65,7 +68,6 @@ public class QuestActivity extends AppCompatActivity {
         acceptButton = findViewById(R.id.accept_button);
         passButton = findViewById(R.id.pass_button);
         view = findViewById(R.id.main_container);
-
 
         questCardRepository = new QuestCardRepository(application);
 
@@ -139,6 +141,12 @@ public class QuestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 accepted = true;
 
+                // Достаем Никнейм и Токен Из SharedPreferences для GET запроса на сервак
+                SharedPreferences preferences = PreferenceManager
+                        .getDefaultSharedPreferences(QuestActivity.this);
+                username = preferences.getString("username", "unknown");
+                token = preferences.getString("taskToken", "unknown");
+
                 // Начинаем запрос
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(APILogin.HOST)
@@ -147,9 +155,7 @@ public class QuestActivity extends AppCompatActivity {
 
                 APIService apiService = retrofit.create(APIService.class);
 
-                APILogin apiLogin = retrofit.create(APILogin.class);
-
-                Call<ResponseBody> call = apiService.acceptTask(id);
+                Call<ResponseBody> call = apiService.acceptTask(username, id);
 
                 // Результаты запроса
                 call.enqueue(new Callback<ResponseBody>() {
@@ -207,7 +213,8 @@ public class QuestActivity extends AppCompatActivity {
                 // Достаем Никнейм и Токен Из SharedPreferences для GET запроса на сервак
                 SharedPreferences preferences = PreferenceManager
                         .getDefaultSharedPreferences(QuestActivity.this);
-                String token = preferences.getString("taskToken", "unknown");
+                username = preferences.getString("username", "unknown");
+                token = preferences.getString("taskToken", "unknown");
 
                 // Начинаем запрос
                 Retrofit retrofit = new Retrofit.Builder()
@@ -217,7 +224,7 @@ public class QuestActivity extends AppCompatActivity {
 
                 APIService apiService = retrofit.create(APIService.class);
 
-                Call<ResponseBody> call = apiService.passTask(token);
+                Call<ResponseBody> call = apiService.passTask(username, token);
 
                 // Результаты запроса
                 call.enqueue(new Callback<ResponseBody>() {

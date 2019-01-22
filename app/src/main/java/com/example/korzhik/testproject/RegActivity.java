@@ -29,6 +29,7 @@ public class RegActivity extends AppCompatActivity {
     private EditText etSurname;
     private EditText etUsername;
     private EditText etPassword;
+    private EditText etPasswordConf;
     private Button btnLogin;
     private Button btnBack;
     private LinearLayout view;
@@ -38,6 +39,7 @@ public class RegActivity extends AppCompatActivity {
     public String surname;
     public String username;
     public String password;
+    public String passwordConf;
 
 
     @Override
@@ -51,6 +53,7 @@ public class RegActivity extends AppCompatActivity {
         etSurname = findViewById(R.id.etSurname);
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
+        etPasswordConf = findViewById(R.id.etConfPassword);
         btnBack = findViewById(R.id.bBack);
         btnLogin = findViewById(R.id.bLogin);
         view = findViewById(R.id.great_reg);
@@ -75,58 +78,72 @@ public class RegActivity extends AppCompatActivity {
                 username = etUsername.getText().toString();
                 password = etPassword.getText().toString();
 
-                // Начинаем запрос
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(APILogin.HOST)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
+                if (name.matches("^[а-яА-ЯёЁa-zA-Z]+$") &&
+                        surname.matches("^[а-яА-ЯёЁa-zA-Z]+$") &&
+                        username.matches("^[a-zA-Z0-9]+$") &&
+                        password.matches("^[a-zA-Z0-9]+$")) {
+                    RegisterUser();
+                } else if (name.equals("") | surname.equals("") | username.equals("") | password.equals("")) {
+                    Snackbar.make(view, "Заполните пустые поля",
+                            Snackbar.LENGTH_LONG)
+                            .show();
+                } else if (name.length() < 3 | surname.length() < 3) {
+                    Snackbar.make(view, "Имя и Фамилия не менее 3-х символов",
+                            Snackbar.LENGTH_LONG)
+                            .show();
+                } else if (username.length() < 5 | password.length() < 8) {
+                    Snackbar.make(view, "Никнейм не менее 5 и пароль не менее 8 символов",
+                            Snackbar.LENGTH_LONG)
+                            .show();
+                } else if (!password.equals(passwordConf)) {
+                    Snackbar.make(view, "Пароли не совпадают",
+                            Snackbar.LENGTH_LONG)
+                            .show();
+                }
+            }
+        });
+    }
 
-                APILogin apiLogin = retrofit.create(APILogin.class);
+    public void RegisterUser() {
+        // Начинаем запрос
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(APILogin.HOST)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-                Call<ResponseBody> call = apiLogin.regUser(name, surname, username, password);
+        APILogin apiLogin = retrofit.create(APILogin.class);
 
-                call.enqueue(new Callback<ResponseBody>() {
-                    // Что произойдет в случае удачного исхода
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        TextView answer = (TextView) findViewById(R.id.answer);
-                        try {
-                            // Если с сервера были возвращены ошибки, то отобразить их в строке
-                            final String mMessage = response.body().string();
-                            if (mMessage.equals("Переданы неверные данные") |
-                                    mMessage.equals("Никнейм не менее 5 символов") |
-                                    mMessage.equals("Пароль не менее 8 символов") |
-                                    mMessage.equals("Пароли не совпадают") |
-                                    mMessage.equals("Пользователь с таким ником уже зарегистрирован")) {
-                                answer.setText(mMessage);
-                            } else {
-                                // Если с сервера не были возвращены ошибки, то...
-                                // Открываем SharedPreferences и сохраняем в него Никнейм и токен
-                                SharedPreferences preferences = PreferenceManager
-                                        .getDefaultSharedPreferences(RegActivity.this);
-                                SharedPreferences.Editor editor = preferences.edit();
-                                editor.putString("fullname", name + " " + surname);
-                                editor.putString("username", username);
-                                editor.putString("token", mMessage);
-                                editor.apply();
-                                // Перекидываем пользователя на страницу профиля
-                                spi.getAndSaveProfileInfo(RegActivity.this);
-                                startActivity(new Intent(RegActivity.this,
-                                        MainActivity.class));
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
+        Call<ResponseBody> call = apiLogin.regUser(name, surname, username, password);
 
-                    // Что произойдет в случае неудачного исхода
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        // Показываем Тост с просьбой попробовать снова
-                        Snackbar.make(view, "Проверьте подключение к интернету",
-                                Snackbar.LENGTH_SHORT).show();
-                    }
-                });
+        call.enqueue(new Callback<ResponseBody>() {
+            // Что произойдет в случае удачного исхода
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                TextView answer = (TextView) findViewById(R.id.answer);
+                try {
+                    final String mMessage = response.body().string();
+                    answer.setText(mMessage);
+                    SharedPreferences preferences = PreferenceManager
+                            .getDefaultSharedPreferences(RegActivity.this);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("username", username);
+                    editor.putString("token", mMessage);
+                    editor.apply();
+                    // Перекидываем пользователя на страницу профиля
+                    startActivity(new Intent(RegActivity.this,
+                            MainActivity.class));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // Что произойдет в случае неудачного исхода
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                // Показываем Тост с просьбой попробовать снова
+                Snackbar.make(view, "Что-то пошло не так... Попробуйте снова...",
+                        Snackbar.LENGTH_LONG)
+                        .show();
             }
         });
     }

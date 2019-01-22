@@ -46,7 +46,8 @@
         android:background="@color/buttonOne"
         android:textColor="@color/colorText"
         android:textSize="20sp"
-        android:textColorHint="@color/colorTextHint"/>
+        android:textColorHint="@color/colorTextHint"
+        android:inputType="textPassword"/>
 
     <TextView
         android:id="@+id/answer"
