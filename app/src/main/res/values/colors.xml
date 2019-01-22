@@ -8,6 +8,8 @@
     <color name="colorText">#fcfcfc</color>
     <color name="colorTextHint">#787878</color>
     <color name="buttonOne">#37474f</color>
+    <color name="buttonTwo">#113e58</color>
+    <color name="buttonThree">#106b9f</color>
     <color name="colorNotSelected">#95a2b2</color>
     <color name="primary_light">#D1C4E9</color>
     <color name="colorAccent">#1aa2f0</color>
@@ -15,8 +17,4 @@
     <color name="secondary_text">#757575</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
-    <color name="accept_button_active">#fbc02d</color>
-    <color name="accept_button_inactive">#fff59d</color>
-    <color name="pass_button_active">#2e7d32</color>
-    <color name="pass_button_inactive">#a5d6a7</color>
 </resources>

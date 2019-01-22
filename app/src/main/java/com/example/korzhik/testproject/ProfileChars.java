@@ -1,13 +1,28 @@
 package com.example.korzhik.testproject;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ProfileChars {
-    private int lvl;
-    private int exp;
-    private int intelligence;
-    private int social;
-    private int friendly;
-    private int homey;
-    private int physic;
+    @SerializedName("lvl")
+    public int lvl;
+
+    @SerializedName("number")
+    public int number;
+
+    @SerializedName("intelligence")
+    public int intelligence;
+
+    @SerializedName("social_skills")
+    public int socialSkills;
+
+    @SerializedName("friendliness")
+    public int friendliness;
+
+    @SerializedName("home_economics")
+    public int homeEconomics;
+    @SerializedName("physical_activity")
+    public int physicalActivity;
+
 
     public int getLvl() {
         return lvl;
@@ -17,12 +32,12 @@ public class ProfileChars {
         this.lvl = lvl;
     }
 
-    public int getExp() {
-        return exp;
+    public int getNumber() {
+        return number;
     }
 
-    public void setExp(int exp) {
-        this.exp = exp;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public int getIntelligence() {
@@ -33,35 +48,35 @@ public class ProfileChars {
         this.intelligence = intelligence;
     }
 
-    public int getSocial() {
-        return social;
+    public int getSocialSkills() {
+        return socialSkills;
     }
 
-    public void setSocial(int social) {
-        this.social = social;
+    public void setSocialSkills(int socialSkills) {
+        this.socialSkills = socialSkills;
     }
 
-    public int getFriendly() {
-        return friendly;
+    public int getFriendliness() {
+        return friendliness;
     }
 
-    public void setFriendly(int friendly) {
-        this.friendly = friendly;
+    public void setFriendliness(int friendliness) {
+        this.friendliness = friendliness;
     }
 
-    public int getHomey() {
-        return homey;
+    public int getHomeEconomics() {
+        return homeEconomics;
     }
 
-    public void setHomey(int homey) {
-        this.homey = homey;
+    public void setHomeEconomics(int homeEconomics) {
+        this.homeEconomics = homeEconomics;
     }
 
-    public int getPhysic() {
-        return physic;
+    public int getPhysicalActivity() {
+        return physicalActivity;
     }
 
-    public void setPhysic(int physic) {
-        this.physic = physic;
+    public void setPhysicalActivity(int physicalActivity) {
+        this.physicalActivity = physicalActivity;
     }
 }

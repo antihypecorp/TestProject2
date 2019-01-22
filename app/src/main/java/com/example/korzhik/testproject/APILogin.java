@@ -28,7 +28,7 @@ public interface APILogin {
 
     // GET запрос для получения информации пользователя
     @GET("/getUserInfo.php")
-    Call<List<UserLogin>> getUserInfo(@Query("username") String username);
+    Call<List<ProfileChars>> getUserInfo(@Query("username") String username);
 
     // POST запрос для регистрации пользователя
     @FormUrlEncoded

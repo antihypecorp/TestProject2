@@ -23,13 +23,15 @@ public class LoginMainActivity extends AppCompatActivity {
     public String username;
     public String token;
     private StoreQuestInfo sqi;
+    private StoreProfileInfo spi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_main);
 
-        StoreQuestInfo sqi = new StoreQuestInfo();
+        sqi = new StoreQuestInfo();
+        spi = new StoreProfileInfo();
 
         // Из SharedPreferences достаем Никнейм и Токен для GET запроса на сервак
         SharedPreferences preferences = PreferenceManager
@@ -69,6 +71,7 @@ public class LoginMainActivity extends AppCompatActivity {
                                 LoginActivity.class);
                         startActivity(intentLogin);
                     } else {
+                        spi.getAndSaveProfileInfo(LoginMainActivity.this);
                         Intent intentEnter = new Intent(
                                 LoginMainActivity.this,
                                 MainActivity.class);

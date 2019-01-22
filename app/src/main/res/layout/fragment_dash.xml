@@ -29,6 +29,7 @@
         android:text="Имя"
         android:textSize="28sp"
         android:textStyle="bold"
+        android:textColor="@color/colorText"
         app:layout_constraintBottom_toTopOf="@+id/level"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/avatar"
@@ -44,7 +45,8 @@
         android:text="Уровень: 10"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/avatar" />
+        app:layout_constraintTop_toBottomOf="@id/avatar"
+        android:textColor="@color/colorText"/>
 
     <TextView
         android:id="@+id/exp_text"
@@ -55,7 +57,8 @@
         android:text="Опыт:"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/level" />
+        app:layout_constraintTop_toBottomOf="@id/level"
+        android:textColor="@color/colorText"/>
 
     <com.sasank.roundedhorizontalprogress.RoundedHorizontalProgressBar
         android:id="@+id/exp_bar"
@@ -77,7 +80,8 @@
         android:text="Выполнено квестов: 49"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/exp_bar" />
+        app:layout_constraintTop_toBottomOf="@id/exp_bar"
+        android:textColor="@color/colorText"/>
 
     <android.support.v7.widget.CardView
         android:id="@+id/chars_container"
@@ -87,7 +91,8 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quests_text">
+        app:layout_constraintTop_toBottomOf="@+id/quests_text"
+        app:cardBackgroundColor="@color/colorCardBackground">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -105,35 +110,36 @@
                 android:layout_marginBottom="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                >
 
                 <ImageView
                     android:id="@+id/char_intelligence"
                     android:layout_width="52dp"
                     android:layout_height="52dp"
                     android:layout_weight="1"
-                    app:srcCompat="@mipmap/ic_launcher_round" />
+                    app:srcCompat="@mipmap/iqpicture_round" />
 
                 <ImageView
                     android:id="@+id/char_social"
                     android:layout_width="52dp"
                     android:layout_height="52dp"
                     android:layout_weight="1"
-                    app:srcCompat="@mipmap/ic_launcher_round" />
+                    app:srcCompat="@mipmap/socicon_round" />
 
                 <ImageView
                     android:id="@+id/char_friendly"
                     android:layout_width="52dp"
                     android:layout_height="52dp"
                     android:layout_weight="1"
-                    app:srcCompat="@mipmap/ic_launcher_round" />
+                    app:srcCompat="@mipmap/charityicon" />
 
                 <ImageView
                     android:id="@+id/char_housekeeping"
                     android:layout_width="52dp"
                     android:layout_height="52dp"
                     android:layout_weight="1"
-                    app:srcCompat="@mipmap/ic_launcher_round" />
+                    app:srcCompat="@mipmap/mopicon" />
 
 
                 <ImageView
@@ -141,7 +147,7 @@
                     android:layout_width="52dp"
                     android:layout_height="52dp"
                     android:layout_weight="1"
-                    app:srcCompat="@mipmap/ic_launcher_round" />
+                    app:srcCompat="@mipmap/handicon" />
 
             </LinearLayout>
 
@@ -158,7 +164,8 @@
                     android:layout_weight="1"
                     android:text="10"
                     android:textAlignment="center"
-                    android:textSize="32sp" />
+                    android:textSize="32sp"
+                    android:textColor="@color/colorText"/>
 
                 <TextView
                     android:id="@+id/value_social"
@@ -167,7 +174,8 @@
                     android:layout_weight="1"
                     android:text="10"
                     android:textAlignment="center"
-                    android:textSize="32sp" />
+                    android:textSize="32sp"
+                    android:textColor="@color/colorText"/>
 
                 <TextView
                     android:id="@+id/value_friendly"
@@ -176,7 +184,8 @@
                     android:layout_weight="1"
                     android:text="10"
                     android:textAlignment="center"
-                    android:textSize="32sp" />
+                    android:textSize="32sp"
+                    android:textColor="@color/colorText"/>
 
                 <TextView
                     android:id="@+id/value_housekeeping"
@@ -185,7 +194,8 @@
                     android:layout_weight="1"
                     android:text="10"
                     android:textAlignment="center"
-                    android:textSize="32sp" />
+                    android:textSize="32sp"
+                    android:textColor="@color/colorText"/>
 
                 <TextView
                     android:id="@+id/value_health"
@@ -194,7 +204,8 @@
                     android:layout_weight="1"
                     android:text="10"
                     android:textAlignment="center"
-                    android:textSize="32sp" />
+                    android:textSize="32sp"
+                    android:textColor="@color/colorText"/>
             </LinearLayout>
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
@@ -207,7 +218,9 @@
         android:layout_margin="16dp"
         android:text="ВЫЙТИ"
         app:layout_constraintTop_toBottomOf="@id/chars_container"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/colorText"
+        android:background="@color/buttonThree"/>
 
 
 </android.support.constraint.ConstraintLayout>

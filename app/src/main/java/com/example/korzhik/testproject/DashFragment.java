@@ -33,15 +33,25 @@ public class DashFragment extends Fragment {//профиль
 
     private TextView tvName;
     private TextView tvLvl;
-    private TextView tvCommon;
+    private TextView tvNumber;
+    private TextView iqValue;
+    private TextView socialValue;
+    private TextView charityValue;
+    private TextView homeValue;
+    private TextView healthValue;
     private Button btnLogout;
 
-    public String name;
-    public String surname;
-    public int lvl;
+    public String fullname;
     public int common;
     public String username;
     public String token;
+    public int  lvl;
+    public int number;
+    public int iq;
+    public int social;
+    public int charity;
+    public int home;
+    public int health;
 
     int i;
 
@@ -60,56 +70,89 @@ public class DashFragment extends Fragment {//профиль
                         getActivity()
                                 .getApplicationContext());
 
-        name = preferences.getString("name", "unknown");
-        surname = preferences.getString("surname", "unknown");
+        fullname = preferences.getString("fullname", "unknown");
         username = preferences.getString("username", "unknown");
         token = preferences.getString("token", "unknown");
+
+        lvl = preferences.getInt("lvl", 20);
+//        number = preferences.getInt("number", 30);
+//        iq = preferences.getInt("iq", 30);
+//        social = preferences.getInt("social", 30);
+//        charity = preferences.getInt("charity", 30);
+//        home = preferences.getInt("home", 30);
+//        health = preferences.getInt("health", 30);
+
         v = inflater.inflate(R.layout.fragment_dash, container, false);
+
+        // Вьюха имени и фамилии, уровень, количество выполненных квестов
+        tvName = v.findViewById(R.id.name);
+        tvLvl = v.findViewById(R.id.level);
+        tvNumber = v.findViewById(R.id.quests_text);
+        // характеристики
         chars[0] = v.findViewById(R.id.char_intelligence);
         chars[1] = v.findViewById(R.id.char_social);
         chars[2] = v.findViewById(R.id.char_friendly);
         chars[3] = v.findViewById(R.id.char_housekeeping);
         chars[4] = v.findViewById(R.id.char_health);
 
-        btnLogout = v.findViewById(R.id.button_logout);
+        iqValue = v.findViewById(R.id.value_intelligence);
+        socialValue = v.findViewById(R.id.value_social);
+        charityValue = v.findViewById(R.id.value_friendly);
+        homeValue= v.findViewById(R.id.value_housekeeping);
+        healthValue = v.findViewById(R.id.value_health);
 
-        // Вьюха имени и фамилии
-        tvName = v.findViewById(R.id.name);
+        tvName.setText(fullname);
+        tvLvl.setText(Integer.toString(lvl));
+        tvNumber.setText(Integer.toString(number));
+
+
+
+
+
+
+
+
+
+
+
 
         // Начинаем запрос
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(APILogin.HOST)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(APILogin.HOST)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//
+//        APILogin apiLogin = retrofit.create(APILogin.class);
+//
+//        Call<List<UserLogin>> call = apiLogin.getUserInfo(username);
+//
+//        call.enqueue(new Callback<List<UserLogin>>() {
+//            // Что произойдет в случае удачного исхода
+//            @Override
+//            public void onResponse(Call<List<UserLogin>> call,
+//                                   Response<List<UserLogin>> response) {
+//                List<UserLogin> posts = response.body();
+//
+//                // Цикл, выводящий данные на Вьюкшку
+//                for (UserLogin userLogin : posts) {
+//                    String name = "";
+//
+//                    name += userLogin.getName() + " " + userLogin.getSurname();
+//
+//                    tvName.setText(name);
+//                }
+//            }
+//
+//            // Что произойдет в случае неудачного исхода
+//            @Override
+//            public void onFailure(Call<List<UserLogin>> call, Throwable t) {
+//                Snackbar.make(DashFragment.this.v, "Проверьте подключение к интернету",
+//                        Snackbar.LENGTH_SHORT).show();
+//            }
+//        });
+        btnLogout = v.findViewById(R.id.button_logout);
 
-        APILogin apiLogin = retrofit.create(APILogin.class);
 
-        Call<List<UserLogin>> call = apiLogin.getUserInfo(username);
-
-        call.enqueue(new Callback<List<UserLogin>>() {
-            // Что произойдет в случае удачного исхода
-            @Override
-            public void onResponse(Call<List<UserLogin>> call,
-                                   Response<List<UserLogin>> response) {
-                List<UserLogin> posts = response.body();
-
-                // Цикл, выводящий данные на Вьюкшку
-                for (UserLogin userLogin : posts) {
-                    String name = "";
-
-                    name += userLogin.getName() + " " + userLogin.getSurname();
-
-                    tvName.setText(name);
-                }
-            }
-
-            // Что произойдет в случае неудачного исхода
-            @Override
-            public void onFailure(Call<List<UserLogin>> call, Throwable t) {
-                Snackbar.make(DashFragment.this.v, "Проверьте подключение к интернету",
-                        Snackbar.LENGTH_SHORT).show();
-            }
-        });
 
         // Кнопка выхода
         // Если нажата кнопка выхода, то...

@@ -81,7 +81,7 @@ public class QuestActivity extends AppCompatActivity {
                         getSupportActionBar().setTitle(questCards.get(0).getName());
                         shortInfo.setText(questCards.get(0).getShort_info());
                         fullInfo.setText(questCards.get(0).getFull_info());
-                        questPicture.setImageResource(R.drawable.iqpicture);
+                        questPicture.setImageResource(R.drawable.iqfull);
                         id = questCards.get(0).getId();
 
                         break;
@@ -91,7 +91,7 @@ public class QuestActivity extends AppCompatActivity {
                         getSupportActionBar().setTitle(questCards.get(1).getName());
                         shortInfo.setText(questCards.get(1).getShort_info());
                         fullInfo.setText(questCards.get(1).getFull_info());
-                        questPicture.setBackgroundResource(R.drawable.social);
+                        questPicture.setBackgroundResource(R.drawable.socialfull);
                         id = questCards.get(1).getId();
 
                         break;
@@ -101,7 +101,7 @@ public class QuestActivity extends AppCompatActivity {
                         getSupportActionBar().setTitle(questCards.get(2).getName());
                         shortInfo.setText(questCards.get(2).getShort_info());
                         fullInfo.setText(questCards.get(2).getFull_info());
-                        questPicture.setBackgroundResource(R.drawable.charity);
+                        questPicture.setBackgroundResource(R.drawable.charityfull);
                         id = questCards.get(2).getId();
 
                         break;
@@ -111,7 +111,7 @@ public class QuestActivity extends AppCompatActivity {
                         getSupportActionBar().setTitle(questCards.get(3).getName());
                         shortInfo.setText(questCards.get(3).getShort_info());
                         fullInfo.setText(questCards.get(3).getFull_info());
-                        questPicture.setBackgroundResource(R.drawable.cleaning);
+                        questPicture.setBackgroundResource(R.drawable.housekeepfull);
                         id = questCards.get(3).getId();
 
                         break;
@@ -121,7 +121,7 @@ public class QuestActivity extends AppCompatActivity {
                         getSupportActionBar().setTitle(questCards.get(4).getName());
                         shortInfo.setText(questCards.get(4).getShort_info());
                         fullInfo.setText(questCards.get(4).getFull_info());
-                        questPicture.setBackgroundResource(R.drawable.health);
+                        questPicture.setBackgroundResource(R.drawable.sportsfull);
                         id = questCards.get(4).getId();
 
                         break;
@@ -169,16 +169,17 @@ public class QuestActivity extends AppCompatActivity {
                             // Делаем кнопку "Взять квест" неактивной
                             acceptButton.setEnabled(false);
                             acceptButton.setClickable(false);
-                            acceptButton.setBackgroundColor(ContextCompat
+                            /*acceptButton.setBackgroundColor(ContextCompat
                                     .getColor(QuestActivity.this,
-                                            R.color.accept_button_inactive));
+                                            R.color.accept_button_inactive));*/
+                            acceptButton.setVisibility(View.GONE);
 
                             // Делаем кнопку "Сдать квест" активной
                             passButton.setEnabled(true);
                             passButton.setClickable(true);
-                            passButton.setBackgroundColor(ContextCompat
+                            /*passButton.setBackgroundColor(ContextCompat
                                     .getColor(QuestActivity.this,
-                                            R.color.pass_button_active));
+                                            R.color.pass_button_active));*/
 
                             // Выводим сообщение об удачном взятии задания
                             Snackbar.make(view, "Задание взято!",
@@ -231,7 +232,10 @@ public class QuestActivity extends AppCompatActivity {
                             passButton.setClickable(false);
                             passButton.setBackgroundColor(ContextCompat
                                     .getColor(QuestActivity.this,
-                                            R.color.pass_button_inactive));
+                                            R.color.colorPrimaryDark));
+                            passButton.setTextColor( ContextCompat
+                                    .getColor(QuestActivity.this,
+                                            R.color.colorTextHint));
 
                             // Выводим сообщение об удачном выполнении задания
                             Snackbar.make(view, "Задание выполнено!",
@@ -245,7 +249,7 @@ public class QuestActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
                         // Показываем Тост с просьбой попробовать снова
-                        Snackbar.make(view, "Что-то пошло не так...Попробуйте снова...",
+                        Snackbar.make(view, "Проверьте подключение к интернету",
                                 Snackbar.LENGTH_SHORT).show();
                     }
                 });

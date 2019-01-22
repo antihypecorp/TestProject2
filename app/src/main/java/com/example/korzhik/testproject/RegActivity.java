@@ -32,6 +32,7 @@ public class RegActivity extends AppCompatActivity {
     private Button btnLogin;
     private Button btnBack;
     private LinearLayout view;
+    private StoreProfileInfo spi;
 
     public String name;
     public String surname;
@@ -43,6 +44,7 @@ public class RegActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg);
+        spi = new StoreProfileInfo();
 
         // К приватным переменным привязываем элементы верстки
         etName = findViewById(R.id.etName);
@@ -108,6 +110,7 @@ public class RegActivity extends AppCompatActivity {
                                 editor.putString("token", mMessage);
                                 editor.apply();
                                 // Перекидываем пользователя на страницу профиля
+                                spi.getAndSaveProfileInfo(RegActivity.this);
                                 startActivity(new Intent(RegActivity.this,
                                         MainActivity.class));
                             }

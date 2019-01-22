@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
+    android:background="@color/colorBackground"
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
@@ -41,6 +41,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:titleTextColor="@color/colorAccent"
                 />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
@@ -64,6 +65,7 @@
                 android:text=""
                 android:textSize="24sp"
                 android:textStyle="bold|italic"
+                android:textColor="@color/colorText"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -78,6 +80,7 @@
                 android:padding="@dimen/activity_horizontal_margin"
                 android:text=""
                 android:textSize="20sp"
+                android:textColor="@color/colorText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/quest_short_description"/>
@@ -87,15 +90,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_margin="16dp"
-                android:background="@color/accept_button_active"
+                android:background="@color/buttonTwo"
                 android:text="@string/button_accept_text"
                 android:textSize="24dp"
+                android:textColor="@color/colorText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/quest_full_description"/>
-            <!--app:layout_constraintEnd_toStartOf="@id/pass_button"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toBottomOf="@id/quest_description_long_large" -->
 
 
             <Button
@@ -103,15 +104,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_margin="16dp"
-                android:background="@color/pass_button_inactive"
+                android:background="@color/buttonThree"
                 android:text="@string/button_pass_text"
                 android:textSize="24dp"
+                android:textColor="@color/colorText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/quest_full_description"/>
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toEndOf="@id/accept_button"-->
-            <!--app:layout_constraintTop_toBottomOf="@+id/quest_description_long_large" -->
 
             <TextView
                 android:id="@+id/white"
