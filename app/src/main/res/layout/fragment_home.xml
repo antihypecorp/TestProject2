@@ -288,6 +288,17 @@
 
             </android.support.v7.widget.CardView>
 
+            <Button
+                android:id="@+id/button_add"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_margin="16dp"
+                android:background="@color/buttonThree"
+                android:text="Добавить квест"
+                android:textSize="24sp"
+                android:textColor="@color/colorText"
+                />
+
             <TextView
                 android:id="@+id/white"
                 android:layout_width="match_parent"
