@@ -2,16 +2,15 @@ package com.example.korzhik.testproject;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -87,6 +86,22 @@ public class RegActivity extends AppCompatActivity {
                     Snackbar.make(view, "Заполните пустые поля",
                             Snackbar.LENGTH_LONG)
                             .show();
+                } else if (!name.matches("^[а-яА-ЯёЁa-zA-Z]+$")) {
+                    Snackbar.make(view, "Имя только из латиницы, кириллицы и цифр",
+                            Snackbar.LENGTH_LONG)
+                            .show();
+                } else if (!surname.matches("^[а-яА-ЯёЁa-zA-Z]+$")) {
+                    Snackbar.make(view, "Фамилия только из латиницы, кириллицы и цифр",
+                            Snackbar.LENGTH_LONG)
+                            .show();
+                } else if (!username.matches("^[a-zA-Z0-9]+$")) {
+                    Snackbar.make(view, "Никнейи только из латиницы и цифр",
+                            Snackbar.LENGTH_LONG)
+                            .show();
+                } else if (!password.matches("^[a-zA-Z0-9]+$")) {
+                    Snackbar.make(view, "Пароль только из латиницы и цифр",
+                            Snackbar.LENGTH_LONG)
+                            .show();
                 } else if (name.length() < 3 | surname.length() < 3) {
                     Snackbar.make(view, "Имя и Фамилия не менее 3-х символов",
                             Snackbar.LENGTH_LONG)
@@ -141,7 +156,7 @@ public class RegActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 // Показываем Тост с просьбой попробовать снова
-                Snackbar.make(view, "Что-то пошло не так... Попробуйте снова...",
+                Snackbar.make(view, "Проверьте подключение к интернету.",
                         Snackbar.LENGTH_LONG)
                         .show();
             }

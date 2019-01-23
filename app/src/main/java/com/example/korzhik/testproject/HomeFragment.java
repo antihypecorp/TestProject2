@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -35,6 +36,8 @@ public class HomeFragment extends Fragment implements LifecycleOwner {//нача
     TextView tvs_shorts[] = new TextView[5]; // массив кратких описаний квестов
     View supView;
     private QuestCardRepository questCardRepository;
+
+    private StoreProfileInfo spi;
 
 
     private SharedPreferences preferences;
@@ -72,6 +75,7 @@ public class HomeFragment extends Fragment implements LifecycleOwner {//нача
         questCardRepository = new QuestCardRepository(application);
 
         LiveData<List<QuestCard>> liveData = questCardRepository.getAllQuestCards();
+
 
         liveData.observe(HomeFragment.this, new Observer<List<QuestCard>>() {
             @Override

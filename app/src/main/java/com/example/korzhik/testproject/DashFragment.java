@@ -62,12 +62,14 @@ public class DashFragment extends Fragment {//профиль
 
     View v;
     private StoreProfileInfo spi;
+    private int nextLvlScore;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
 
         SharedPreferences preferences = PreferenceManager
                 .getDefaultSharedPreferences(
@@ -107,23 +109,27 @@ public class DashFragment extends Fragment {//профиль
         homeValue= v.findViewById(R.id.value_housekeeping);
         healthValue = v.findViewById(R.id.value_health);
 
+        nextLvlScore = ((number / 100 + 1) * 100);
         tvName.setText(username);
         tvLvl.setText("Уровень: " + Integer.toString(lvl));
-        tvNumber.setText("Опыт: " + Integer.toString(number));
+        tvNumber.setText("Опыт: " + Integer.toString(number) + " из " + nextLvlScore);
         iqValue.setText(Integer.toString(iq));
         socialValue.setText(Integer.toString(social));
         charityValue.setText(Integer.toString(charity));
         homeValue.setText(Integer.toString(home));
         healthValue.setText(Integer.toString(health));
 
+
         btnLogout = v.findViewById(R.id.button_logout);
 
 
 
-        float numbar = number;
+        float numbar = number; // колво очков опыта
         float maxlvl = (number / 100 + 1) * 100;
-        float barint = (numbar / maxlvl) * 100;
-        pb.animateProgress(1000, 0, 80);
+        float barint = numbar - 100 ;
+        int barshowint = Math.round(barint/100);
+        pb.animateProgress(500, 0, barshowint);
+
 
 
 //        spi = new StoreProfileInfo();

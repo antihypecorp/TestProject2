@@ -53,6 +53,7 @@ public class QuestActivity extends AppCompatActivity {
 
     public String username;
     public String token;
+    private StoreProfileInfo spi;
 
     final static public String KEY_NAME = "KEY_NAME";
 
@@ -247,6 +248,13 @@ public class QuestActivity extends AppCompatActivity {
                             // Выводим сообщение об удачном выполнении задания
                             Snackbar.make(view, "Задание выполнено!",
                                     Snackbar.LENGTH_SHORT).show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        spi = new StoreProfileInfo();
+                        try {
+                            spi.getAndSaveProfileInfo(getApplicationContext());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
