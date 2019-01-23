@@ -13,14 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".support.MainActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
             android:screenOrientation="nosensor" />
-        <activity android:name=".QuestActivity"
+        <activity android:name=".screens.QuestActivity"
             android:theme="@style/AppThemeBarless"/>
         <activity
-            android:name=".LoginMainActivity"
+            android:name=".authorization.LoginMainActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
             android:screenOrientation="nosensor"
@@ -31,9 +31,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
+        <activity android:name=".authorization.LoginActivity"
             android:theme="@style/AppThemeBarless"/>
-        <activity android:name=".RegActivity"
+        <activity android:name=".authorization.RegActivity"
             android:theme="@style/AppThemeBarless"></activity>
     </application>
 

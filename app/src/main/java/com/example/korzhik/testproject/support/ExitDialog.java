@@ -1,4 +1,4 @@
-package com.example.korzhik.testproject;
+package com.example.korzhik.testproject.support;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

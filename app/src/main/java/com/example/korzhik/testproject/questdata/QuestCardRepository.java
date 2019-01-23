@@ -1,8 +1,12 @@
-package com.example.korzhik.testproject;
+package com.example.korzhik.testproject.questdata;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
+
+import com.example.korzhik.testproject.questdata.LocalBDClass;
+import com.example.korzhik.testproject.questdata.QuestCard;
+import com.example.korzhik.testproject.questdata.QuestCardDAO;
 
 import java.util.List;
 

@@ -1,10 +1,12 @@
-package com.example.korzhik.testproject;
+package com.example.korzhik.testproject.profiledata;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.widget.ListAdapter;
 import android.widget.Toast;
+
+import com.example.korzhik.testproject.authorization.APILogin;
+import com.example.korzhik.testproject.profiledata.ProfileChars;
 
 import java.io.IOException;
 import java.util.List;

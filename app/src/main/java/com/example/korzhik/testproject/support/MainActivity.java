@@ -1,15 +1,17 @@
-package com.example.korzhik.testproject;
+package com.example.korzhik.testproject.support;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import com.example.korzhik.testproject.R;
+import com.example.korzhik.testproject.screens.DashFragment;
+import com.example.korzhik.testproject.screens.HomeFragment;
+import com.example.korzhik.testproject.screens.NotifFragment;
+import com.example.korzhik.testproject.support.ExitDialog;
 
 public class MainActivity extends AppCompatActivity {
 

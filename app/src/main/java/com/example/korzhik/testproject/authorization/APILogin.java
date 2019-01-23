@@ -1,4 +1,6 @@
-package com.example.korzhik.testproject;
+package com.example.korzhik.testproject.authorization;
+
+import com.example.korzhik.testproject.profiledata.ProfileChars;
 
 import java.util.List;
 

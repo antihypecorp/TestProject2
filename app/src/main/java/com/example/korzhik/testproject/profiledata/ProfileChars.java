@@ -1,4 +1,4 @@
-package com.example.korzhik.testproject;
+package com.example.korzhik.testproject.profiledata;
 
 import com.google.gson.annotations.SerializedName;
 

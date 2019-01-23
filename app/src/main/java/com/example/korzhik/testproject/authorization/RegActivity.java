@@ -1,4 +1,4 @@
-package com.example.korzhik.testproject;
+package com.example.korzhik.testproject.authorization;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.korzhik.testproject.support.MainActivity;
+import com.example.korzhik.testproject.R;
+import com.example.korzhik.testproject.profiledata.StoreProfileInfo;
 
 import java.io.IOException;
 

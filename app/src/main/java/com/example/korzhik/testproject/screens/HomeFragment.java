@@ -1,4 +1,4 @@
-package com.example.korzhik.testproject;
+package com.example.korzhik.testproject.screens;
 
 import android.app.Application;
 import android.arch.lifecycle.LifecycleOwner;
@@ -7,25 +7,22 @@ import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.util.List;
+import com.example.korzhik.testproject.questdata.LocalBDClass;
+import com.example.korzhik.testproject.questdata.QuestCard;
+import com.example.korzhik.testproject.questdata.QuestCardRepository;
+import com.example.korzhik.testproject.R;
+import com.example.korzhik.testproject.profiledata.StoreProfileInfo;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import java.util.List;
 
 public class HomeFragment extends Fragment implements LifecycleOwner {//начальный экран
 

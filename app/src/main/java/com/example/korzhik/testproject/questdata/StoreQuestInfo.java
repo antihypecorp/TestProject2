@@ -1,7 +1,11 @@
-package com.example.korzhik.testproject;
+package com.example.korzhik.testproject.questdata;
 
 import android.app.Application;
 import android.util.Log;
+
+import com.example.korzhik.testproject.questdata.APIService;
+import com.example.korzhik.testproject.questdata.QuestCard;
+import com.example.korzhik.testproject.questdata.QuestCardRepository;
 
 import java.util.List;
 

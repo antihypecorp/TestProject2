@@ -1,10 +1,15 @@
-package com.example.korzhik.testproject;
+package com.example.korzhik.testproject.authorization;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+
+import com.example.korzhik.testproject.support.MainActivity;
+import com.example.korzhik.testproject.R;
+import com.example.korzhik.testproject.profiledata.StoreProfileInfo;
+import com.example.korzhik.testproject.questdata.StoreQuestInfo;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package com.example.korzhik.testproject;
+package com.example.korzhik.testproject.questdata;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;

@@ -1,4 +1,4 @@
-package com.example.korzhik.testproject;
+package com.example.korzhik.testproject.screens;
 
 
 import android.app.Application;
@@ -16,6 +16,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.korzhik.testproject.questdata.APIService;
+import com.example.korzhik.testproject.questdata.QuestCard;
+import com.example.korzhik.testproject.questdata.QuestCardRepository;
+import com.example.korzhik.testproject.R;
+import com.example.korzhik.testproject.profiledata.StoreProfileInfo;
+import com.example.korzhik.testproject.authorization.APILogin;
 
 import java.io.IOException;
 import java.util.List;
