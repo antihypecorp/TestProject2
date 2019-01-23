@@ -22,6 +22,7 @@ import com.example.korzhik.testproject.questdata.QuestCardRepository;
 import com.example.korzhik.testproject.R;
 import com.example.korzhik.testproject.profiledata.StoreProfileInfo;
 
+import java.io.IOException;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements LifecycleOwner {//начальный экран
@@ -66,6 +67,13 @@ public class HomeFragment extends Fragment implements LifecycleOwner {//нача
         tvs_shorts[2] = supView.findViewById(R.id.quest_3_short_description);
         tvs_shorts[3] = supView.findViewById(R.id.quest_4_short_description);
         tvs_shorts[4] = supView.findViewById(R.id.quest_5_short_description);
+
+        spi = new StoreProfileInfo();
+        try {
+            spi.getAndSaveProfileInfo(getActivity().getApplicationContext());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         application = getActivity().getApplication();

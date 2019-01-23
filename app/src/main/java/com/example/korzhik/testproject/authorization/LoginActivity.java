@@ -3,11 +3,13 @@ package com.example.korzhik.testproject.authorization;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etPassword;
     private Button btnLogin;
     private Button btnReg;
+    private LinearLayout vd;
 
     public String username;
     public String password;
@@ -46,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnReg = findViewById(R.id.bReg);
         btnLogin = findViewById(R.id.bLogin);
+        vd = findViewById(R.id.login_container);
 
         // Если нажали кнопку "Зарегистрироваться", то перенаправить на окно регистрации
         btnReg.setOnClickListener(new View.OnClickListener() {
@@ -84,26 +88,37 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             // Если с сервера не были возвращены ошибки, то...
                             final String mMessage = response.body().string();
-                            if (!mMessage.equals("Пользователя с таким ником не существует")) {
-                                if (!mMessage.equals("Введен неверный пароль")) {
-                                    SharedPreferences preferences = PreferenceManager
-                                            .getDefaultSharedPreferences(
-                                                    LoginActivity.this);
-                                    SharedPreferences.Editor editor = preferences.edit();
-                                    editor.putString("username", username);
-                                    editor.putString("token", mMessage);
-                                    editor.apply();
-                                    spi.getAndSaveProfileInfo(LoginActivity.this);
-                                    Intent intentReged = new Intent(
-                                            LoginActivity.this,
-                                            MainActivity.class);
-                                    startActivity(intentReged);
+                            if (!mMessage.equals("Переданы неверные данные")) {
+                                if (!mMessage.equals("Пользователя с таким ником не существует")) {
+                                    if (!mMessage.equals("Введен неверный пароль")) {
+                                        SharedPreferences preferences = PreferenceManager
+                                                .getDefaultSharedPreferences(
+                                                        LoginActivity.this);
+                                        SharedPreferences.Editor editor = preferences.edit();
+                                        editor.putString("username", username);
+                                        editor.putString("token", mMessage);
+                                        editor.apply();
+                                        spi.getAndSaveProfileInfo(LoginActivity.this);
+                                        Intent intentReged = new Intent(
+                                                LoginActivity.this,
+                                                MainActivity.class);
+                                        startActivity(intentReged);
+                                    } else {
+                                        Snackbar.make(vd,
+                                                "Введен неверный пароль",
+                                                Snackbar.LENGTH_LONG).show();
+                                    }
                                 } else {
-                                    answer.setText(mMessage);
+                                    Snackbar.make(vd,
+                                            "Пользователя с таким ником не существует",
+                                            Snackbar.LENGTH_LONG).show();
                                 }
                             } else {
-                                answer.setText(mMessage);
+                                Snackbar.make(vd,
+                                        "Переданы неверные данные",
+                                        Snackbar.LENGTH_LONG).show();
                             }
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
