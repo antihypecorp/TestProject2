@@ -1,8 +1,12 @@
 package com.example.korzhik.testproject;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -19,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment selectedFragment = null;
             switch (item.getItemId()) {
-                case R.id.navigation_settings:
+                case R.id.navigation_top:
                     selectedFragment = new NotifFragment();
                     break;
                 case R.id.navigation_tasks:
@@ -58,8 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        ExitDialog exitDialog = new ExitDialog();
+        exitDialog.show(getSupportFragmentManager(), "Exit dialog");
 
     }
+
 }
 
 

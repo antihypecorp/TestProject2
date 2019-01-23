@@ -1,226 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/great_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground">
 
-
-    <ImageView
-        android:id="@+id/avatar"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/profileicon" />
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Имя"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textColor="@color/colorText"
-        app:layout_constraintBottom_toTopOf="@+id/level"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/avatar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <TextView
-        android:id="@+id/level"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/great_profile"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingTop="16dp"
-        android:text="Уровень: 10"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/avatar"
-        android:textColor="@color/colorText"/>
+        android:layout_height="match_parent"
+        >
 
-    <TextView
-        android:id="@+id/exp_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:text="Опыт:"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/level"
-        android:textColor="@color/colorText"/>
 
-    <com.sasank.roundedhorizontalprogress.RoundedHorizontalProgressBar
-        android:id="@+id/exp_bar"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/exp_text" />
-
-    <TextView
-        android:id="@+id/quests_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:text="Выполнено квестов: 49"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/exp_bar"
-        android:textColor="@color/colorText"/>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/chars_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quests_text"
-        app:cardBackgroundColor="@color/colorCardBackground">
-
-        <android.support.constraint.ConstraintLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/name_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:cardBackgroundColor="@color/colorCardBackground"
+            app:layout_constraintBottom_toTopOf="@id/exp_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-
-            <LinearLayout
-                android:id="@+id/char_container"
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                >
+                android:layout_height="match_parent"
+                android:layout_margin="16dp">
 
                 <ImageView
-                    android:id="@+id/char_intelligence"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@mipmap/iqpicture_round" />
+                    android:id="@+id/avatar"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/profileicon" />
 
-                <ImageView
-                    android:id="@+id/char_social"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@mipmap/socicon_round" />
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Имя"
+                    android:textColor="@color/colorText"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/avatar"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
 
-                <ImageView
-                    android:id="@+id/char_friendly"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@mipmap/charityicon" />
+            </android.support.constraint.ConstraintLayout>
 
-                <ImageView
-                    android:id="@+id/char_housekeeping"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@mipmap/mopicon" />
+        </android.support.v7.widget.CardView>
 
 
-                <ImageView
-                    android:id="@+id/char_health"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@mipmap/handicon" />
+        <android.support.v7.widget.CardView
+            android:id="@+id/exp_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:cardBackgroundColor="@color/colorCardBackground"
+            app:layout_constraintBottom_toTopOf="@+id/chars_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name_container">
 
-            </LinearLayout>
-
-            <LinearLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/char_container">
+                android:layout_height="match_parent"
+                android:layout_margin="16dp">
+
 
                 <TextView
-                    android:id="@+id/value_intelligence"
+                    android:id="@+id/level"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="10"
-                    android:textAlignment="center"
-                    android:textSize="32sp"
-                    android:textColor="@color/colorText"/>
+                    android:text="Уровень: 10"
+                    android:textColor="@color/colorText"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/value_social"
+                    android:id="@+id/exp_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="10"
-                    android:textAlignment="center"
-                    android:textSize="32sp"
-                    android:textColor="@color/colorText"/>
+                    android:paddingTop="8dp"
+                    android:text="Опыт:"
+                    android:textColor="@color/colorText"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/level" />
+
+                <com.sasank.roundedhorizontalprogress.RoundedHorizontalProgressBar
+                    android:id="@+id/exp_bar"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/exp_text" />
 
                 <TextView
-                    android:id="@+id/value_friendly"
+                    android:id="@+id/quests_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="10"
-                    android:textAlignment="center"
-                    android:textSize="32sp"
-                    android:textColor="@color/colorText"/>
+                    android:paddingTop="8dp"
+                    android:text="Выполнено квестов: 49"
+                    android:textColor="@color/colorText"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/exp_bar" />
+            </android.support.constraint.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/value_housekeeping"
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/chars_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:cardBackgroundColor="@color/colorCardBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/exp_container">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp">
+
+
+                <LinearLayout
+                    android:id="@+id/char_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="10"
-                    android:textAlignment="center"
-                    android:textSize="32sp"
-                    android:textColor="@color/colorText"/>
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
 
-                <TextView
-                    android:id="@+id/value_health"
+                    <ImageView
+                        android:id="@+id/char_intelligence"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@mipmap/iqpicture_round" />
+
+                    <ImageView
+                        android:id="@+id/char_social"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@mipmap/socicon_round" />
+
+                    <ImageView
+                        android:id="@+id/char_friendly"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@mipmap/charityicon" />
+
+                    <ImageView
+                        android:id="@+id/char_housekeeping"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@mipmap/mopicon" />
+
+
+                    <ImageView
+                        android:id="@+id/char_health"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@mipmap/handicon" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="10"
-                    android:textAlignment="center"
-                    android:textSize="32sp"
-                    android:textColor="@color/colorText"/>
-            </LinearLayout>
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v7.widget.CardView>
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/char_container">
+
+                    <TextView
+                        android:id="@+id/value_intelligence"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="10"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText"
+                        android:textSize="32sp" />
+
+                    <TextView
+                        android:id="@+id/value_social"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="10"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText"
+                        android:textSize="32sp" />
+
+                    <TextView
+                        android:id="@+id/value_friendly"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="10"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText"
+                        android:textSize="32sp" />
+
+                    <TextView
+                        android:id="@+id/value_housekeeping"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="10"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText"
+                        android:textSize="32sp" />
+
+                    <TextView
+                        android:id="@+id/value_health"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="10"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText"
+                        android:textSize="32sp" />
+                </LinearLayout>
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
 
 
-    <Button
-        android:id="@+id/button_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="ВЫЙТИ"
-        app:layout_constraintTop_toBottomOf="@id/chars_container"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="@color/colorText"
-        android:background="@color/buttonThree"/>
+        <Button
+            android:id="@+id/button_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@color/buttonThree"
+            android:text="ВЫЙТИ"
+            android:textColor="@color/colorText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chars_container" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/button_logout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="\n \n \n"/>
 
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

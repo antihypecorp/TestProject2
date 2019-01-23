@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sasank.roundedhorizontalprogress.RoundedHorizontalProgressBar;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -40,6 +42,7 @@ public class DashFragment extends Fragment {//профиль
     private TextView homeValue;
     private TextView healthValue;
     private Button btnLogout;
+    private RoundedHorizontalProgressBar pb;
 
     public String fullname;
     public int common;
@@ -58,6 +61,7 @@ public class DashFragment extends Fragment {//профиль
     ImageView chars[] = new ImageView[5];
 
     View v;
+    private StoreProfileInfo spi;
 
     @Nullable
     @Override
@@ -95,6 +99,8 @@ public class DashFragment extends Fragment {//профиль
         chars[3] = v.findViewById(R.id.char_housekeeping);
         chars[4] = v.findViewById(R.id.char_health);
 
+        pb = v.findViewById(R.id.exp_bar);
+
         iqValue = v.findViewById(R.id.value_intelligence);
         socialValue = v.findViewById(R.id.value_social);
         charityValue = v.findViewById(R.id.value_friendly);
@@ -112,6 +118,20 @@ public class DashFragment extends Fragment {//профиль
 
         btnLogout = v.findViewById(R.id.button_logout);
 
+
+
+        float numbar = number;
+        float maxlvl = (number / 100 + 1) * 100;
+        float barint = (numbar / maxlvl) * 100;
+        pb.animateProgress(1000, 0, 80);
+
+
+//        spi = new StoreProfileInfo();
+//        try {
+//            spi.getAndSaveProfileInfo(getActivity().getApplicationContext());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
 
         // Кнопка выхода

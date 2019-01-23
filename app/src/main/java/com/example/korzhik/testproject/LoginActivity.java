@@ -37,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         spi = new StoreProfileInfo();
-
         // К приватным переменным привязываем элементы верстки
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);

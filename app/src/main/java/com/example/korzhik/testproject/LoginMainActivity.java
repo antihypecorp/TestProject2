@@ -2,11 +2,9 @@ package com.example.korzhik.testproject;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -40,9 +38,7 @@ public class LoginMainActivity extends AppCompatActivity {
         username = preferences.getString("username", "unknown");
         token = preferences.getString("token", "unknown");
 
-        sqi.getAndSaveQuestInfo( getApplication() );
-
-
+        sqi.getAndSaveQuestInfo(getApplication());
 
 
         // Начали запрос
@@ -75,7 +71,7 @@ public class LoginMainActivity extends AppCompatActivity {
                         Intent intentEnter = new Intent(
                                 LoginMainActivity.this,
                                 MainActivity.class);
-                            startActivity(intentEnter);
+                        startActivity(intentEnter);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -93,6 +89,9 @@ public class LoginMainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
+        finish();
     }
+
+
 }
+
