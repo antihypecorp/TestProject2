@@ -2,11 +2,9 @@ package com.example.korzhik.testproject;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -22,11 +20,16 @@ public class LoginMainActivity extends AppCompatActivity {
 
     public String username;
     public String token;
+    private StoreQuestInfo sqi;
+    private StoreProfileInfo spi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_main);
+
+        sqi = new StoreQuestInfo();
+        spi = new StoreProfileInfo();
 
         // Из SharedPreferences достаем Никнейм и Токен для GET запроса на сервак
         SharedPreferences preferences = PreferenceManager
@@ -34,6 +37,9 @@ public class LoginMainActivity extends AppCompatActivity {
 
         username = preferences.getString("username", "unknown");
         token = preferences.getString("token", "unknown");
+
+        sqi.getAndSaveQuestInfo(getApplication());
+
 
         // Начали запрос
         Retrofit retrofit = new Retrofit.Builder()
@@ -61,6 +67,7 @@ public class LoginMainActivity extends AppCompatActivity {
                                 LoginActivity.class);
                         startActivity(intentLogin);
                     } else {
+                        spi.getAndSaveProfileInfo(LoginMainActivity.this);
                         Intent intentEnter = new Intent(
                                 LoginMainActivity.this,
                                 MainActivity.class);
@@ -79,4 +86,12 @@ public class LoginMainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+
 }
+

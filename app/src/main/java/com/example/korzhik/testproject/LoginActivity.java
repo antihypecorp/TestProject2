@@ -30,12 +30,13 @@ public class LoginActivity extends AppCompatActivity {
 
     public String username;
     public String password;
+    private StoreProfileInfo spi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        spi = new StoreProfileInfo();
         // К приватным переменным привязываем элементы верстки
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
@@ -88,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                                     editor.putString("username", username);
                                     editor.putString("token", mMessage);
                                     editor.apply();
+                                    spi.getAndSaveProfileInfo(LoginActivity.this);
                                     Intent intentReged = new Intent(
                                             LoginActivity.this,
                                             MainActivity.class);
@@ -116,6 +118,11 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
+
+    }
+
+    @Override
+    public void onBackPressed() {
 
     }
 }
