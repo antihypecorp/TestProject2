@@ -56,6 +56,7 @@ public class StoreQuestInfo {
 
             @Override
             public void onFailure(Call<List<QuestCard>> call, Throwable t) {
+                Log.d("MyLog", "WRONG");
                 result = false;
             }
         });
