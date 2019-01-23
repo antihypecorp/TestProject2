@@ -112,7 +112,7 @@ public class DashFragment extends Fragment {//профиль
         nextLvlScore = ((number / 100 + 1) * 100);
         tvName.setText(username);
         tvLvl.setText("Уровень: " + Integer.toString(lvl));
-        tvNumber.setText("Опыт: " + Integer.toString(number) + " из " + nextLvlScore);
+        tvNumber.setText(Integer.toString(number) + "/" + nextLvlScore);
         iqValue.setText(Integer.toString(iq));
         socialValue.setText(Integer.toString(social));
         charityValue.setText(Integer.toString(charity));
@@ -126,8 +126,8 @@ public class DashFragment extends Fragment {//профиль
 
         float numbar = number; // колво очков опыта
         float maxlvl = (number / 100 + 1) * 100;
-        float barint = numbar - 100 ;
-        int barshowint = Math.round(barint/100);
+        float barint = numbar - 100 * (number / 100);
+        int barshowint = Math.round(barint);
         pb.animateProgress(500, 0, barshowint);
 
 

@@ -105,18 +105,20 @@
                     app:layout_constraintTop_toBottomOf="@id/exp_text"
                     app:backgroundColor="@color/colorTextHint"
                     app:progressColor="@color/colorAccent"
+                    android:maxHeight="30dp"
+                    android:minHeight="30dp"
                     />
 
                 <TextView
                     android:id="@+id/quests_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:text="Выполнено квестов: 49"
+                    android:text=""
+                    android:textAlignment="center"
                     android:textColor="@color/colorText"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/exp_bar" />
+                    app:layout_constraintTop_toTopOf="@id/exp_bar" />
             </android.support.constraint.ConstraintLayout>
 
 
