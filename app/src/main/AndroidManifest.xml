@@ -7,7 +7,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -17,8 +17,9 @@
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
             android:screenOrientation="nosensor" />
-        <activity android:name=".screens.QuestActivity"
-            android:theme="@style/AppThemeBarless"/>
+        <activity
+            android:name=".screens.QuestActivity"
+            android:theme="@style/AppThemeBarless" />
         <activity
             android:name=".authorization.LoginMainActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -31,10 +32,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".authorization.LoginActivity"
-            android:theme="@style/AppThemeBarless"/>
-        <activity android:name=".authorization.RegActivity"
-            android:theme="@style/AppThemeBarless"></activity>
+        <activity
+            android:name=".authorization.LoginActivity"
+            android:theme="@style/AppThemeBarless" />
+        <activity
+            android:name=".authorization.RegActivity"
+            android:theme="@style/AppThemeBarless" />
+        <activity android:name=".screens.addTask"></activity>
     </application>
 
 </manifest>

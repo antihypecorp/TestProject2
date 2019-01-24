@@ -36,7 +36,7 @@ public class RatingLineAdapter
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         RatingLine ratingLine = data.get(position);
         holder.name.setText(ratingLine.name + " " + ratingLine.surname);
-        holder.username.setText(ratingLine.username);
+        holder.username.setText("@" + ratingLine.username);
         holder.number.setText(ratingLine.number);
     }
 

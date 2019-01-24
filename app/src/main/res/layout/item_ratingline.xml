@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorCardBackground">
+    app:cardBackgroundColor="@color/colorCardBackground"
+    android:layout_marginTop="4dp"
+    >
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,27 +17,46 @@
             android:id="@+id/tvusername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="TEST"
+            android:textAllCaps="false"
             android:textColor="@color/colorText"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvname"/>
+            app:layout_constraintTop_toBottomOf="@id/tvname" />
 
         <TextView
             android:id="@+id/tvnumber"
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorText"
+            android:text="1000"
+            android:textColor="@color/colorAccent"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@id/tvname"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="TEST TESTОВИЧ"
             android:textColor="@color/colorText"
-            app:layout_constraintEnd_toStartOf="@id/tvname"
+            android:textSize="24sp"
+            android:textStyle="italic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvkek"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Очки"
+            android:textColor="@color/colorText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvnumber" />
 
     </android.support.constraint.ConstraintLayout>
 
