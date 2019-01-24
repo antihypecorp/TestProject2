@@ -57,6 +57,7 @@ public class RegActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         etPasswordConf = findViewById(R.id.etConfPassword);
+
         btnBack = findViewById(R.id.bBack);
         btnLogin = findViewById(R.id.bLogin);
         view = findViewById(R.id.great_reg);
@@ -80,11 +81,13 @@ public class RegActivity extends AppCompatActivity {
                 surname = etSurname.getText().toString();
                 username = etUsername.getText().toString();
                 password = etPassword.getText().toString();
+                passwordConf = etPasswordConf.getText().toString();
 
                 if (name.matches("^[а-яА-ЯёЁa-zA-Z]+$") &&
                         surname.matches("^[а-яА-ЯёЁa-zA-Z]+$") &&
                         username.matches("^[a-zA-Z0-9]+$") &&
-                        password.matches("^[a-zA-Z0-9]+$")) {
+                        password.matches("^[a-zA-Z0-9]+$") &&
+                        passwordConf.matches("^[a-zA-Z0-9]+$")) {
                     RegisterUser();
                 } else if (name.equals("") | surname.equals("") | username.equals("") | password.equals("")) {
                     Snackbar.make(view, "Заполните пустые поля",
@@ -102,20 +105,8 @@ public class RegActivity extends AppCompatActivity {
                     Snackbar.make(view, "Никнейи только из латиницы и цифр",
                             Snackbar.LENGTH_LONG)
                             .show();
-                } else if (!password.matches("^[a-zA-Z0-9]+$")) {
+                } else if (!password.matches("^[a-zA-Z0-9]+$") || !passwordConf.matches("^[a-zA-Z0-9]+$")) {
                     Snackbar.make(view, "Пароль только из латиницы и цифр",
-                            Snackbar.LENGTH_LONG)
-                            .show();
-                } else if (name.length() < 3 | surname.length() < 3) {
-                    Snackbar.make(view, "Имя и Фамилия не менее 3-х символов",
-                            Snackbar.LENGTH_LONG)
-                            .show();
-                } else if (username.length() < 5 | password.length() < 8) {
-                    Snackbar.make(view, "Никнейм не менее 5 и пароль не менее 8 символов",
-                            Snackbar.LENGTH_LONG)
-                            .show();
-                } else if (!password.equals(passwordConf)) {
-                    Snackbar.make(view, "Пароли не совпадают",
                             Snackbar.LENGTH_LONG)
                             .show();
                 }
@@ -132,25 +123,33 @@ public class RegActivity extends AppCompatActivity {
 
         APILogin apiLogin = retrofit.create(APILogin.class);
 
-        Call<ResponseBody> call = apiLogin.regUser(name, surname, username, password);
+        Call<ResponseBody> call = apiLogin.regUser(name, surname, username, password, passwordConf);
 
         call.enqueue(new Callback<ResponseBody>() {
             // Что произойдет в случае удачного исхода
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                TextView answer = (TextView) findViewById(R.id.answer);
                 try {
                     final String mMessage = response.body().string();
-                    answer.setText(mMessage);
-                    SharedPreferences preferences = PreferenceManager
-                            .getDefaultSharedPreferences(RegActivity.this);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("username", username);
-                    editor.putString("token", mMessage);
-                    editor.apply();
-                    // Перекидываем пользователя на страницу профиля
-                    startActivity(new Intent(RegActivity.this,
-                            MainActivity.class));
+                    if (mMessage.equals("Имя и фамилия не менее 2 символов") |
+                            mMessage.equals("Никнейм не менее 5 символов") |
+                            mMessage.equals("Пароль не менее 8 символов") |
+                            mMessage.equals("Пароли не совпадают") |
+                            mMessage.equals("Пользователь с таким ником уже зарегистрирован")) {
+                        Snackbar.make(view, mMessage,
+                                Snackbar.LENGTH_LONG)
+                                .show();
+                    } else {
+                        SharedPreferences preferences = PreferenceManager
+                                .getDefaultSharedPreferences(RegActivity.this);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("username", username);
+                        editor.putString("token", mMessage);
+                        editor.apply();
+                        // Перекидываем пользователя на страницу профиля
+                        startActivity(new Intent(RegActivity.this,
+                                MainActivity.class));
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

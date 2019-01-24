@@ -38,7 +38,8 @@ public interface APILogin {
     Call<ResponseBody> regUser(@Field("name") String name,
                                @Field("surname") String surname,
                                @Field("username") String userName,
-                               @Field("password") String password);
+                               @Field("password") String password,
+                               @Field("passwordConf") String passwordConf);
 
     // POST запрос для авторизации пользователя
     @FormUrlEncoded

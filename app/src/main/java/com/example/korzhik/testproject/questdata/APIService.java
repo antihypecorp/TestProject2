@@ -28,7 +28,7 @@ public interface APIService {
     Call<ResponseBody> passTask(@Query("username") String username,
                                 @Query("token") String token);
 
-    // POST запрос, регистрирующий выполнение Квеста
+    // POST запрос, регистрирующий отправку Квеста
     @FormUrlEncoded
     @POST("tasks/send.php")
     Call<ResponseBody> sendTask(@Field("name") String name,
