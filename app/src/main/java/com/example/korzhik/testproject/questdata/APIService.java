@@ -28,6 +28,11 @@ public interface APIService {
     Call<ResponseBody> passTask(@Query("username") String username,
                                 @Query("token") String token);
 
+    // GET запрос для проверки квеста на выполненность
+    @GET("/tasks/logic/check.php")
+    Call<ResponseBody> checkTask(@Query("username") String username,
+                                 @Query("id") int id);
+
     // POST запрос, регистрирующий отправку Квеста
     @FormUrlEncoded
     @POST("tasks/send.php")

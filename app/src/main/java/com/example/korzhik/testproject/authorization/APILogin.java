@@ -46,10 +46,4 @@ public interface APILogin {
     @POST("/login.php")
     Call<ResponseBody> loginUser(@Field("username") String userName,
                                  @Field("password") String password);
-
-    // POST запрос для проверки квеста на выполненность
-    @FormUrlEncoded
-    @POST("/tasks/logic/accept.php")
-    Call<ResponseBody> checkQuest(@Field("questToken") String questToken,
-                                 @Field("username") String userName);
 }

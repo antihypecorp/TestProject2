@@ -12,6 +12,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -143,6 +144,46 @@ public class QuestActivity extends AppCompatActivity {
         passButton.setClickable(false);
         passButton.setEnabled(false);
 
+       /*  // Достаем Никнейм и Токен Из SharedPreferences для GET запроса на сервак
+        SharedPreferences preferences = PreferenceManager
+                .getDefaultSharedPreferences(QuestActivity.this);
+        username = preferences.getString("username", "unknown");
+
+        // Начинаем запрос
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(APILogin.HOST)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        APIService apiService = retrofit.create(APIService.class);
+
+        Call<ResponseBody> call = apiService.checkTask(username, id);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    final String mMessage = response.body().string();
+                    if (mMessage.equals("Вы уже выполнили этот квест")) {
+                        acceptButton.setEnabled(false);
+                        acceptButton.setClickable(false);
+                        Snackbar.make(view, mMessage,
+                                Snackbar.LENGTH_SHORT).show();
+                    } else {
+                        Snackbar.make(view, mMessage,
+                                Snackbar.LENGTH_SHORT).show();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });*/
+
         // Если нажата кнопка "Взять квест", то...
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,40 +214,31 @@ public class QuestActivity extends AppCompatActivity {
                         try {
                             // Сохраняем токен квеста в SharedPreferences
                             final String mMessage = response.body().string();
-                            if (mMessage.equals("Error")) {
-                                acceptButton.setEnabled(false);
-                                acceptButton.setClickable(false);
-                                passButton.setEnabled(false);
-                                passButton.setClickable(false);
-                                Snackbar.make(view, mMessage,
-                                        Snackbar.LENGTH_SHORT).show();
-                            } else {
-                                SharedPreferences preferences = PreferenceManager
-                                        .getDefaultSharedPreferences(
-                                                QuestActivity.this);
-                                SharedPreferences.Editor editor = preferences.edit();
-                                editor.putString("taskToken", mMessage);
-                                editor.apply();
+                            SharedPreferences preferences = PreferenceManager
+                                    .getDefaultSharedPreferences(
+                                            QuestActivity.this);
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putString("taskToken", mMessage);
+                            editor.apply();
 
-                                // Делаем кнопку "Взять квест" неактивной
-                                acceptButton.setEnabled(false);
-                                acceptButton.setClickable(false);
-                                /*acceptButton.setBackgroundColor(ContextCompat
+                            // Делаем кнопку "Взять квест" неактивной
+                            acceptButton.setEnabled(false);
+                            acceptButton.setClickable(false);
+                            /*acceptButton.setBackgroundColor(ContextCompat
                                     .getColor(QuestActivity.this,
                                             R.color.accept_button_inactive));*/
-                                acceptButton.setVisibility(View.GONE);
+                            acceptButton.setVisibility(View.GONE);
 
-                                // Делаем кнопку "Сдать квест" активной
-                                passButton.setEnabled(true);
-                                passButton.setClickable(true);
-                                /*passButton.setBackgroundColor(ContextCompat
+                            // Делаем кнопку "Сдать квест" активной
+                            passButton.setEnabled(true);
+                            passButton.setClickable(true);
+                            /*passButton.setBackgroundColor(ContextCompat
                                     .getColor(QuestActivity.this,
                                             R.color.pass_button_active));*/
 
-                                // Выводим сообщение об удачном взятии задания
-                                Snackbar.make(view, "Задание взято!",
-                                        Snackbar.LENGTH_SHORT).show();
-                            }
+                            // Выводим сообщение об удачном взятии задания
+                            Snackbar.make(view, "Задание взято!",
+                                    Snackbar.LENGTH_SHORT).show();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

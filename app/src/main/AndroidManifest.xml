@@ -12,13 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".screens.addTask"></activity>
         <activity
             android:name=".support.MainActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
             android:screenOrientation="nosensor" />
-        <activity android:name=".screens.QuestActivity"
-            android:theme="@style/AppThemeBarless"/>
+        <activity
+            android:name=".screens.QuestActivity"
+            android:theme="@style/AppThemeBarless" />
         <activity
             android:name=".authorization.LoginMainActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -31,10 +33,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".authorization.LoginActivity"
-            android:theme="@style/AppThemeBarless"/>
-        <activity android:name=".authorization.RegActivity"
-            android:theme="@style/AppThemeBarless"></activity>
+        <activity
+            android:name=".authorization.LoginActivity"
+            android:theme="@style/AppThemeBarless" />
+        <activity
+            android:name=".authorization.RegActivity"
+            android:theme="@style/AppThemeBarless" />
     </application>
 
 </manifest>

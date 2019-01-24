@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screens.addTask"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    android:id="@+id/addTask">
+
+    <EditText
+        android:id="@+id/taskName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Название квеста..."
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"
+        android:layout_margin="16dp"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/shortInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Короткое описание..."
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"
+        android:layout_margin="16dp"
+        tools:ignore="MissingConstraints"/>
+
+    <EditText
+        android:id="@+id/fullInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Полное описание"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"
+        tools:ignore="MissingConstraints"
+        android:layout_margin="16dp"/>
+
+    <Button
+        android:id="@+id/sendBtn"
+        android:text="Отправить квест"
+        android:textSize="16dp"
+        android:textColor="@color/colorText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/buttonTwo"
+        android:layout_margin="16dp"/>
+
+</LinearLayout>

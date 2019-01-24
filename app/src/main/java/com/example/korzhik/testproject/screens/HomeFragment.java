@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.korzhik.testproject.questdata.LocalBDClass;
@@ -35,7 +36,7 @@ public class HomeFragment extends Fragment implements LifecycleOwner {//нача
     private QuestCardRepository questCardRepository;
 
     private StoreProfileInfo spi;
-
+    private Button btnSendTask;
 
     private SharedPreferences preferences;
     Application application;
@@ -54,6 +55,8 @@ public class HomeFragment extends Fragment implements LifecycleOwner {//нача
         exs[2] = supView.findViewById(R.id.ex_3);
         exs[3] = supView.findViewById(R.id.ex_4);
         exs[4] = supView.findViewById(R.id.ex_5);
+
+        btnSendTask = supView.findViewById(R.id.button_add);
 
         tvs_names[0] = supView.findViewById(R.id.quest_1_name);
         tvs_names[1] = supView.findViewById(R.id.quest_2_name);
@@ -141,6 +144,13 @@ public class HomeFragment extends Fragment implements LifecycleOwner {//нача
                 }
             });
         }
+
+        btnSendTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), addTask.class));
+            }
+        });
 
         // ЗАНЕСЕНИЕ ИЗ БД В SHARED PREFS
 
